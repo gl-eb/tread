@@ -18,10 +18,24 @@ devtools::install_github("gl-eb/tecanr")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
 ``` r
 library(tecanr)
-## basic example code
+
+# read supplied example file of single timepoint measurements
+dat <- tecan_read_single(
+        system.file("extdata", "tecan_single.xlsx", package = "tecanr")
+       )
+
+# read your own set of single timepoint measurements
+dat2 <- tecan_read_single("path/to/file.xlsx")
+
+# specify sheet of the excel file (default: 1)
+dat3 <- tecan_read-single("path/to/file.xlsx", sheet = 3)
+
+# read supplied example file of multiple timepoint measurements
+# parameters work the same as for tecan_read_single()
+dat4 <- tecan_read_series(
+        system.file("extdata", "tecan_series.xlsx", package = "tecanr")
+       )
 ```
 
