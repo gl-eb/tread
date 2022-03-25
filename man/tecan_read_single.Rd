@@ -18,6 +18,6 @@ tecan_read_single(xlsx_file, xlsx_sheet = 1)
 Reads a single-timepoint measurement from a tecan plate reader excel file
 }
 \examples{
-tecan_read_series(system.file("extdata", "tecan_single.xlsx", package = "tecanr"))
+tecan_read_single(system.file("extdata", "tecan_single.xlsx", package = "tecanr"))
 
 }

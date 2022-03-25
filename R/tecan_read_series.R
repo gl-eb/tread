@@ -24,7 +24,7 @@ tecan_read_series <- function(xlsx_file, xlsx_sheet = 1) {
     stop("Sheet number must be numeric")
   }
 
-  # import temperature readings
+  # import data from excel spreadsheet
   raw_dat <- readxl::read_xlsx(xlsx_file, sheet = xlsx_sheet, col_names = F)
 
   # initialize variables and vectors for data search
