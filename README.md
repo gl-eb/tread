@@ -35,7 +35,7 @@ dat3 <- tecan_read-single("path/to/file.xlsx", sheet = 3)
 # read supplied example file of multiple timepoint measurements
 # parameters work the same as for tecan_read_single()
 dat4 <- tecan_read_series(
-        system.file("extdata", "tecan_series.xlsx", package = "tecanr")
-       )
+          system.file("extdata", "tecan_series.xlsx", package = "tecanr")
+        )
 ```
 
