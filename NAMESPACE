@@ -2,8 +2,10 @@
 
 export(tecan_read_series)
 export(tecan_read_single)
+export(tecan_read_temperature)
 import(tibble)
 importFrom(data.table,":=")
+importFrom(dplyr,slice)
 importFrom(janitor,row_to_names)
 importFrom(magrittr,"%>%")
 importFrom(readxl,read_xlsx)

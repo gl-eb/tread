@@ -12,7 +12,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
-Imports: data.table, janitor, magrittr, readxl, stringr, tibble
+Imports: data.table, dplyr, janitor, magrittr, readxl, stringr, tibble
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
