@@ -35,7 +35,7 @@ tecan_read_single <- function(xlsx_file, xlsx_sheet = 1) {
   for (i in 1:dim(raw_dat)[1]) {
     if (is.na(raw_dat[i, 1])) {
       if (length(data_start) > 0 && length(data_end) == 0) {
-        data_end <- i-1
+        data_end <- i - 1
       }
     } else if (stringr::str_detect(raw_dat[i, 1], "^Well$")) {
       data_start <- i

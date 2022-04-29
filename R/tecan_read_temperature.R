@@ -32,8 +32,9 @@ tecan_read_temperature <- function(xlsx_file, xlsx_sheet = 1) {
 
   # iterate through rows and extract data
   for (i in 1:dim(raw_dat)[1]) {
-    if (is.na(raw_dat[i, 1])) next
-    else if (stringr::str_detect(raw_dat[i, 1], "Temp. \\[.C\\]")) { # time_found &&
+    if (is.na(raw_dat[i, 1])) {
+      next
+    } else if (stringr::str_detect(raw_dat[i, 1], "Temp. \\[.C\\]")) { # time_found &&
       temp <- raw_dat[i, 2:timepoints] %>%
         slice(1) %>%
         as.numeric()
