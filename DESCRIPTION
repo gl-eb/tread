@@ -1,7 +1,7 @@
 Package: tecanr
 Type: Package
 Title: Read Tecan Infinite 200 Pro Data
-Version: 0.1.0
+Version: 0.2.0
 Author: Gleb Ebert
 Maintainer: Gleb Ebert <gleb.ebert@env.ethz.ch>
 Description: The package provides two functions: one for single-timepoint data
