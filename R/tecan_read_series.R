@@ -1,4 +1,5 @@
 #' Reads a time series of measurements from a tecan plate reader excel file
+#' and assumes, that multiple reads per well were taken
 #'
 #' @param xlsx_file (character) path to Excel file
 #' @param xlsx_sheet (numeric) number of Excel sheet to read (default: 1)
@@ -27,6 +28,7 @@ tecan_read_series <- function(xlsx_file, xlsx_sheet = 1) {
   raw_dat <- read_xlsx(xlsx_file, sheet = xlsx_sheet, col_names = F)
 
   # initialize variables and vectors for data search
+  multiple_reads <- FALSE
   time_found <- FALSE
   well_found <- FALSE
   data_found <- FALSE
@@ -38,6 +40,8 @@ tecan_read_series <- function(xlsx_file, xlsx_sheet = 1) {
   for (i in 1:dim(raw_dat)[1]) {
     if (is.na(raw_dat[i, 1])) {
       next
+    } else if (str_detect(raw_dat[i, 1], "Multiple Reads")) {
+      multiple_reads <- TRUE
     } else if (str_detect(raw_dat[i, 1], "Cycles / Well")) {
       well_found <- TRUE
     } else if (well_found) {
@@ -54,6 +58,9 @@ tecan_read_series <- function(xlsx_file, xlsx_sheet = 1) {
   }
   wells <- as.character(wells)
   time <- as.numeric(time)
+
+  # halt function if spreadsheet does not contain multiple reads per well
+  try(if(!multiple_reads) stop("Can't handle single reads per well"))
 
   # compose data frame using information gathered on first traverse
   dat <- tibble(time = time)
