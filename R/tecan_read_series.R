@@ -7,7 +7,6 @@
 #'
 #' @import tibble
 #' @importFrom data.table :=
-#' @importFrom magrittr %>%
 #' @importFrom readxl read_xlsx
 #' @importFrom stringr str_detect
 #'
@@ -25,7 +24,7 @@ tecan_read_series <- function(xlsx_file, xlsx_sheet = 1) {
   }
 
   # import data from excel spreadsheet
-  raw_dat <- readxl::read_xlsx(xlsx_file, sheet = xlsx_sheet, col_names = F)
+  raw_dat <- read_xlsx(xlsx_file, sheet = xlsx_sheet, col_names = F)
 
   # initialize variables and vectors for data search
   time_found <- FALSE
@@ -39,7 +38,7 @@ tecan_read_series <- function(xlsx_file, xlsx_sheet = 1) {
   for (i in 1:dim(raw_dat)[1]) {
     if (is.na(raw_dat[i, 1])) {
       next
-    } else if (stringr::str_detect(raw_dat[i, 1], "Cycles / Well")) {
+    } else if (str_detect(raw_dat[i, 1], "Cycles / Well")) {
       well_found <- TRUE
     } else if (well_found) {
       wells <- c(wells, raw_dat[i, 1])
@@ -48,7 +47,7 @@ tecan_read_series <- function(xlsx_file, xlsx_sheet = 1) {
     } else if (data_found && !time_found) {
       time <- raw_dat[i, 2:dim(raw_dat)[2]]
       time_found <- TRUE
-    } else if (data_found && str_detect(raw_dat[i, 1], "1;1")) {
+    } else if (data_found && str_detect(raw_dat[i, 1], "Mean")) {
       position_od <- c(position_od, i)
       data_found <- FALSE
     }
@@ -59,7 +58,7 @@ tecan_read_series <- function(xlsx_file, xlsx_sheet = 1) {
   # compose data frame using information gathered on first traverse
   dat <- tibble(time = time)
   for (j in seq_along(wells)) {
-    dat <- dat %>%
+    dat <- dat |>
       add_column(!!wells[j] := as.numeric(
           raw_dat[position_od[j], 2:dim(raw_dat)[2]]
         )
