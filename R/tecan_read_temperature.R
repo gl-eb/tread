@@ -6,7 +6,6 @@
 #'
 #' @import tibble
 #' @importFrom dplyr slice
-#' @importFrom magrittr %>%
 #' @importFrom readxl read_xlsx
 #' @importFrom stringr str_detect
 #'
@@ -24,7 +23,7 @@ tecan_read_temperature <- function(xlsx_file, xlsx_sheet = 1) {
   }
 
   # import data from excel spreadsheet
-  raw_dat <- readxl::read_xlsx(xlsx_file, sheet = xlsx_sheet) # skip = 61, n_max = 1
+  raw_dat <- read_xlsx(xlsx_file, sheet = xlsx_sheet) # skip = 61, n_max = 1
 
   # initialize variables for data search
   time_found <- FALSE
@@ -34,15 +33,15 @@ tecan_read_temperature <- function(xlsx_file, xlsx_sheet = 1) {
   for (i in 1:dim(raw_dat)[1]) {
     if (is.na(raw_dat[i, 1])) {
       next
-    } else if (stringr::str_detect(raw_dat[i, 1], "Temp. \\[.C\\]")) { # time_found &&
-      temp <- raw_dat[i, 2:timepoints] %>%
-        slice(1) %>%
+    } else if (str_detect(raw_dat[i, 1], "Temp. \\[.C\\]")) { # time_found &&
+      temp <- raw_dat[i, 2:timepoints] |>
+        slice(1) |>
         as.numeric()
       break
-    } else if (stringr::str_detect(raw_dat[i, 1], "Time \\[s\\]")) {
+    } else if (str_detect(raw_dat[i, 1], "Time \\[s\\]")) {
       time_found <- TRUE
-      time <- raw_dat[i, 2:timepoints] %>%
-        slice(1) %>%
+      time <- raw_dat[i, 2:timepoints] |>
+        slice(1) |>
         as.integer()
     }
   }

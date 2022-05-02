@@ -7,7 +7,6 @@
 #'
 #' @import tibble
 #' @importFrom janitor row_to_names
-#' @importFrom magrittr %>%
 #' @importFrom readxl read_xlsx
 #' @importFrom stringr str_detect
 #'
@@ -25,7 +24,7 @@ tecan_read_single <- function(xlsx_file, xlsx_sheet = 1) {
   }
 
   # import temperature readings
-  raw_dat <- readxl::read_xlsx(xlsx_file, sheet = xlsx_sheet, col_names = F)
+  raw_dat <- read_xlsx(xlsx_file, sheet = xlsx_sheet, col_names = F)
 
   # initialize variables and vectors for data search
   data_start <- numeric()
@@ -37,14 +36,14 @@ tecan_read_single <- function(xlsx_file, xlsx_sheet = 1) {
       if (length(data_start) > 0 && length(data_end) == 0) {
         data_end <- i - 1
       }
-    } else if (stringr::str_detect(raw_dat[i, 1], "^Well$")) {
+    } else if (str_detect(raw_dat[i, 1], "^Well$")) {
       data_start <- i
     }
   }
 
   # compose data frame using information gathered on first traverse
-  dat <- raw_dat[data_start:data_end, 1:8] %>%
-    janitor::row_to_names(row_number = 1)
+  dat <- raw_dat[data_start:data_end, 1:8] |>
+    row_to_names(row_number = 1)
 
   return(dat)
 }
