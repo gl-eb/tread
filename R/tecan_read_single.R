@@ -11,7 +11,13 @@
 #' @importFrom stringr str_detect
 #'
 #' @examples
-#' tecan_read_single(system.file("extdata", "tecan_single.xlsx", package = "tecanr"))
+#' tecan_read_single(
+#'   system.file(
+#'     "extdata",
+#'     "tecan_singleTime_multiReads.xlsx",
+#'     package = "tecanr"
+#'   )
+#' )
 #'
 #' @export
 tecan_read_single <- function(xlsx_file, xlsx_sheet = 1) {

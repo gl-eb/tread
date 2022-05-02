@@ -10,7 +10,13 @@
 #' @importFrom stringr str_detect
 #'
 #' @examples
-#' tecan_read_temperature(system.file("extdata", "tecan_series.xlsx", package = "tecanr"))
+#' tecan_read_temperature(
+#'   system.file(
+#'     "extdata",
+#'     "tecan_timeSeries_multiReads.xlsx",
+#'     package = "tecanr"
+#'   )
+#' )
 #'
 #' @export
 tecan_read_temperature <- function(xlsx_file, xlsx_sheet = 1) {

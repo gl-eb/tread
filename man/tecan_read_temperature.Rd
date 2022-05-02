@@ -17,6 +17,12 @@ Reads the temperature readings corresponding to a timeseries of Tecan
 Infinite 200 Pro measurements
 }
 \examples{
-tecan_read_temperature(system.file("extdata", "tecan_series.xlsx", package = "tecanr"))
+tecan_read_temperature(
+  system.file(
+    "extdata",
+    "tecan_timeSeries_multiReads.xlsx",
+    package = "tecanr"
+  )
+)
 
 }

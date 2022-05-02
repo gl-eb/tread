@@ -5,7 +5,7 @@ test_that("function expects valid file path", {
 test_that("function expects sheet number as numeric", {
   expect_error(
     tecan_read_single(
-      system.file("extdata", "tecan_single.xlsx", package = "tecanr"),
+      system.file("extdata", "tecan_timeSeries_singleReads.xlsx", package = "tecanr"),
       "2"
     )
   )

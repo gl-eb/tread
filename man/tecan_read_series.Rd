@@ -2,7 +2,8 @@
 % Please edit documentation in R/tecan_read_series.R
 \name{tecan_read_series}
 \alias{tecan_read_series}
-\title{Reads a time series of measurements from a tecan plate reader excel file}
+\title{Reads a time series of measurements from a tecan plate reader excel file
+and assumes, that multiple reads per well were taken}
 \usage{
 tecan_read_series(xlsx_file, xlsx_sheet = 1)
 }
@@ -16,8 +17,15 @@ tecan_read_series(xlsx_file, xlsx_sheet = 1)
 }
 \description{
 Reads a time series of measurements from a tecan plate reader excel file
+and assumes, that multiple reads per well were taken
 }
 \examples{
-tecan_read_series(system.file("extdata", "tecan_series.xlsx", package = "tecanr"))
+tecan_read_series(
+  system.file(
+    "extdata",
+    "tecan_timeSeries_multiReads.xlsx",
+    package = "tecanr"
+  )
+)
 
 }
