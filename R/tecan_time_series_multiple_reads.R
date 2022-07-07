@@ -40,7 +40,7 @@ tecan_time_series_multiple_reads <- function(dat_raw) {
   dat <- tibble::tibble(time = time)
   for (well in seq_along(wells)) {
     dat <- dat |>
-      add_column(!!wells[well] := as.numeric(
+      tibble::add_column(!!wells[well] := as.numeric(
         dat_raw[position_od[well], 2:dim(dat_raw)[2]]
       )
       )
