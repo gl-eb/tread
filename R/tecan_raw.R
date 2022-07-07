@@ -12,4 +12,4 @@
 #'   \item{dat_raw_4}{timeseries and multiple reads per well}
 #' }
 #' @source Gleb Ebert
-"dat_raw"
+"tecan_raw"

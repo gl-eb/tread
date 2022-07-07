@@ -16,12 +16,12 @@ xlsx_file_4 <- "tecan_time_series_multi_reads.xlsx"
 xlsx_path_4 <- system.file("extdata", xlsx_file_4, package = "tecanr")
 dat_raw_4 <- readxl::read_xlsx(xlsx_path_4, sheet = 1, col_names = F)
 
-dat_raw <- list(
+tecan_raw <- list(
   "single_time_single_reads" = dat_raw_1,
   "single_time_multi_reads" = dat_raw_2,
   "time_series_single_reads" = dat_raw_3,
   "time_series_multi_reads" = dat_raw_4
 )
 
-usethis::use_data(dat_raw, overwrite = TRUE)
+usethis::use_data(tecan_raw, overwrite = TRUE)
 
