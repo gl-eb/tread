@@ -12,7 +12,7 @@
 #' @importFrom stringr str_detect
 #'
 #' @examples
-#' tecan_parse(
+#' dat <- tecan_parse(
 #'   system.file(
 #'     "extdata",
 #'     "tecan_timeSeries_multiReads.xlsx",
@@ -25,6 +25,9 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
   # check parameters for validity
   if (!(is.character(xlsx_file))) {
     stop("File path must be a non empty character")
+  }
+  if (!(file.exists(xlsx_file))) {
+    stop(paste("File does not exist:", xlsx_file))
   }
   if (!(is.numeric(xlsx_sheet))) {
     stop("Sheet number must be numeric")
