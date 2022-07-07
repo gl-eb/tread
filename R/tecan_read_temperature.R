@@ -13,7 +13,7 @@
 #' tecan_read_temperature(
 #'   system.file(
 #'     "extdata",
-#'     "tecan_timeSeries_multiReads.xlsx",
+#'     "tecan_time_series_multi_reads.xlsx",
 #'     package = "tecanr"
 #'   )
 #' )
