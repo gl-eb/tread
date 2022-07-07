@@ -3,8 +3,8 @@
 \name{tecan_parse}
 \alias{tecan_parse}
 \title{Parses a Tecan Infinite 200 Pro plate reader excel file, determines the type
-of measurement (single time point or series, single or multiple reads per
-well), and reads the data}
+of measurement (single time point or time series, single or multiple reads
+per well), and reads the data}
 \usage{
 tecan_parse(xlsx_file, xlsx_sheet = 1)
 }
@@ -18,8 +18,8 @@ tecan_parse(xlsx_file, xlsx_sheet = 1)
 }
 \description{
 Parses a Tecan Infinite 200 Pro plate reader excel file, determines the type
-of measurement (single time point or series, single or multiple reads per
-well), and reads the data
+of measurement (single time point or time series, single or multiple reads
+per well), and reads the data
 }
 \examples{
 dat <- tecan_parse(
