@@ -36,12 +36,13 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
   multiple_reads <- FALSE
   time_series <- FALSE
 
-  # iterate through rows and extract data
+  # iterate through rows to detect data format
   for (i in 1:dim(dat_raw)[1]) {
     if (is.na(dat_raw[i, 1])) {
       # skip row if empty
       next
-    } else if (stringr::str_detect(dat_raw[i, 1], "Multiple Reads")) {
+    } else if (stringr::str_detect(dat_raw[i, 1], "Multiple Reads") &&
+               multiple_reads == FALSE) {
       # detect if multiple reads per well were taken
       multiple_reads <- TRUE
       print("Multiple reads per well detected")
@@ -49,21 +50,27 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
       # detect if measurements are time series
       time_series <- TRUE
       print("Time series detected")
-    } else if (multiple_reads) {
-      # if multiple reads per well were taken
-      if (time_series) {
-        # if data is time series of multiple reads per well
-        dat <- tecan_time_series_multiple_reads(dat_raw)
-      } else {
-        # if data is from single time point but multiple reads per well
-      }
-    } else if (!multiple_reads) {
-      # if single read per well was taken
-      if (time_series) {
-        # if data is time series of single reads per well
-      } else {
-        # if data is from single time point and a single read per well
-      }
+    } else if (multiple_reads && time_series) {
+      break
+    }
+  }
+
+  # call correct function to extract data
+  if (multiple_reads) {
+    # if multiple reads per well were taken
+    if (time_series) {
+      # if data is time series of multiple reads per well
+      dat <- tecan_time_series_multiple_reads(dat_raw)
+    } else {
+      # if data is from single time point but multiple reads per well
+      dat <- tecan_single_time_multiple_reads(dat_raw)
+    }
+  } else {
+    # if single read per well was taken
+    if (time_series) {
+      # if data is time series of single reads per well
+    } else {
+      # if data is from single time point and a single read per well
     }
   }
 
