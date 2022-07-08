@@ -67,6 +67,7 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
     }
   } else {
     # if single read per well was taken
+    message("Single reads per well are not supported currently")
     if (time_series) {
       # if data is time series of single reads per well
     } else {
