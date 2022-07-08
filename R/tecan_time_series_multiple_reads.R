@@ -6,14 +6,12 @@
 #' @return (tibble) long format data
 #'
 #' @importFrom data.table :=
+#' @importFrom magrittr %>%
 tecan_time_series_multiple_reads <- function(dat_raw) {
   # initialize variables and vectors for data search
-  time_found <- FALSE
   well_found <- FALSE
-  data_found <- FALSE
-  wells <- character()
-  time <- numeric()
-  position_od <- numeric()
+  well_names <- character()
+  well_locations <- numeric()
 
   # iterate through rows and extract data
   for (i in 1:dim(dat_raw)[1]) {
@@ -22,28 +20,43 @@ tecan_time_series_multiple_reads <- function(dat_raw) {
     } else if (stringr::str_detect(dat_raw[i, 1], "Cycles / Well")) {
       well_found <- TRUE
     } else if (well_found) {
-      wells <- c(wells, dat_raw[i, 1])
+      well_names <- c(well_names, dat_raw[i, 1] |> deframe())
+      well_locations <- c(well_locations, i)
       well_found <- FALSE
-      data_found <- TRUE
-    } else if (data_found && !time_found) {
-      time <- dat_raw[i, 2:dim(dat_raw)[2]]
-      time_found <- TRUE
-    } else if (data_found && stringr::str_detect(dat_raw[i, 1], "Mean")) {
-      position_od <- c(position_od, i)
-      data_found <- FALSE
     }
   }
-  wells <- as.character(wells)
-  time <- as.numeric(time)
 
-  # compose data frame using information gathered on first traverse
-  dat <- tibble::tibble(time = time)
-  for (well in seq_along(wells)) {
-    dat <- dat |>
-      tibble::add_column(!!wells[well] := as.numeric(
-        dat_raw[position_od[well], 2:dim(dat_raw)[2]]
+  # detect number of rows of data per well
+  position_relative <- 0
+  while (TRUE) {
+    position_absolute <- well_locations[1] + position_relative
+    if (is.na(dat_raw[position_absolute + 1, 1])) {
+      break
+    } else {
+      position_relative <- position_relative + 1
+    }
+  }
+
+  # compose data frame using information gathered through parsing
+  dat <- tibble::tibble()
+  for (well in seq_along(well_names)) {
+    # vector of rows to include in data
+    rows <- (well_locations[well] + 1):(well_locations[well] + position_relative)
+    # vector of columns to include in data (columns of NA are filtered out)
+    # magrittr pipe %>% necessary due to complex select condition
+    cols <- dat_raw[well_locations[well], ] %>%
+      dplyr::select(!(where(~ all(is.na(.x))))) |>
+      seq_along()
+    # compose tibble for current well
+    dat_well <- dat_raw[rows, cols] |>
+      data.table::transpose() |>
+      janitor::row_to_names(1) |>
+      tibble::add_column(
+        well = rep(well_names[well], length(cols) - 1),
+        .before = 1
       )
-      )
+    # append current well's data to main tibble
+    dat <- dat |> rbind(dat_well)
   }
 
   return(dat)
