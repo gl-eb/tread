@@ -50,6 +50,7 @@ tecan_time_series_multiple_reads <- function(dat_raw) {
     # compose tibble for current well
     dat_well <- dat_raw[rows, cols] |>
       data.table::transpose() |>
+      tibble::as_tibble() |>
       janitor::row_to_names(1) |>
       tibble::add_column(
         well = rep(well_names[well], length(cols) - 1),
