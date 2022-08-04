@@ -51,7 +51,7 @@ dat4 <- tecan_parse(
 
 # read temperature over time from example file of multiple timepoint
 # measurements
-dat_temperature <- tecan_temperature(
+dat_temperature <- tecan_read_temperature(
   system.file(
     "extdata",
     "tecan_time_series_multi_reads.xlsx",
