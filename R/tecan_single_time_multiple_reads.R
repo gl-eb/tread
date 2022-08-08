@@ -22,7 +22,7 @@ tecan_single_time_multiple_reads <- function(dat_raw) {
 
   # compose data frame using information gathered on first traverse and drop
   # any empty columns
-  dat <- dat_raw[data_start:data_end, 1:8] |>
+  dat <- dat_raw[data_start:data_end,] |>
     janitor::row_to_names(row_number = 1) |>
     purrr::discard(~all(is.na(.) | . ==""))
 
