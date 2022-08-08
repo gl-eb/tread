@@ -21,10 +21,11 @@ tecan_single_time_multiple_reads <- function(dat_raw) {
   }
 
   # compose data frame using information gathered on first traverse and drop
-  # any empty columns
+  # any empty columns; suppress warning about unclean column names
   dat <- dat_raw[data_start:data_end,] |>
     janitor::row_to_names(row_number = 1) |>
-    purrr::discard(~all(is.na(.) | . ==""))
+    purrr::discard(~all(is.na(.) | . =="")) |>
+    suppressWarnings()
 
   return(dat)
 }
