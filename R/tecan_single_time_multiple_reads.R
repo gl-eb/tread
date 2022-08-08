@@ -5,7 +5,7 @@
 #'
 #' @return (tibble) long format data
 tecan_single_time_multiple_reads <- function(dat_raw) {
-# initialize variables and vectors for data search
+  # initialize variables and vectors for data search
   data_start <- numeric()
   data_end <- numeric()
 
@@ -20,9 +20,11 @@ tecan_single_time_multiple_reads <- function(dat_raw) {
     }
   }
 
-  # compose data frame using information gathered on first traverse
+  # compose data frame using information gathered on first traverse and drop
+  # any empty columns
   dat <- dat_raw[data_start:data_end, 1:8] |>
-    janitor::row_to_names(row_number = 1)
+    janitor::row_to_names(row_number = 1) |>
+    purrr::discard(~all(is.na(.) | . ==""))
 
   return(dat)
 }
