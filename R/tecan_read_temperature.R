@@ -4,11 +4,6 @@
 #' @param xlsx_file (character) path to Excel file
 #' @param xlsx_sheet (numeric) number of Excel sheet to read (default: 1)
 #'
-#' @import tibble
-#' @importFrom dplyr slice
-#' @importFrom readxl read_xlsx
-#' @importFrom stringr str_detect
-#'
 #' @examples
 #' tecan_read_temperature(
 #'   system.file(
@@ -29,31 +24,29 @@ tecan_read_temperature <- function(xlsx_file, xlsx_sheet = 1) {
   }
 
   # import data from excel spreadsheet
-  raw_dat <- read_xlsx(xlsx_file, sheet = xlsx_sheet) # skip = 61, n_max = 1
+  raw_dat <- readxl::read_xlsx(xlsx_file, sheet = xlsx_sheet)
 
   # initialize variables for data search
-  time_found <- FALSE
   timepoints <- as.integer(dim(raw_dat)[2])
 
   # iterate through rows and extract data
-  for (i in 1:dim(raw_dat)[1]) {
+  for (i in seq_len(dim(raw_dat)[1])) {
     if (is.na(raw_dat[i, 1])) {
       next
-    } else if (str_detect(raw_dat[i, 1], "Temp. \\[.C\\]")) { # time_found &&
+    } else if (stringr::str_detect(raw_dat[i, 1], "Temp. \\[.C\\]")) {
       temp <- raw_dat[i, 2:timepoints] |>
-        slice(1) |>
+        dplyr::slice(1) |>
         as.numeric()
       break
-    } else if (str_detect(raw_dat[i, 1], "Time \\[s\\]")) {
-      time_found <- TRUE
+    } else if (stringr::str_detect(raw_dat[i, 1], "Time \\[s\\]")) {
       time <- raw_dat[i, 2:timepoints] |>
-        slice(1) |>
+        dplyr::slice(1) |>
         as.integer()
     }
   }
 
   # combine data for plotting
-  dat <- tibble(time = time, temperature = temp)
+  dat <- tibble::tibble(time = time, temperature = temp)
 
   return(dat)
 }

@@ -30,14 +30,14 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
   }
 
   # import data from excel spreadsheet
-  dat_raw <- readxl::read_xlsx(xlsx_file, sheet = xlsx_sheet, col_names = F)
+  dat_raw <- readxl::read_xlsx(xlsx_file, sheet = xlsx_sheet, col_names = FALSE)
 
   # initialize variables and vectors for data search
   multiple_reads <- FALSE
   time_series <- FALSE
 
   # iterate through rows to detect data format
-  for (i in 1:dim(dat_raw)[1]) {
+  for (i in seq_len(dim(dat_raw)[1])) {
     if (is.na(dat_raw[i, 1])) {
       # skip row if empty
       next
