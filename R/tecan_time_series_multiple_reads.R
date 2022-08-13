@@ -14,13 +14,13 @@ tecan_time_series_multiple_reads <- function(dat_raw) {
   well_locations <- numeric()
 
   # iterate through rows and extract data
-  for (i in 1:dim(dat_raw)[1]) {
+  for (i in seq_len(dim(dat_raw)[1])) {
     if (is.na(dat_raw[i, 1])) {
       next
     } else if (stringr::str_detect(dat_raw[i, 1], "Cycles / Well")) {
       well_found <- TRUE
     } else if (well_found) {
-      well_names <- c(well_names, dat_raw[i, 1] |> deframe())
+      well_names <- c(well_names, dat_raw[i, 1] |> tibble::deframe())
       well_locations <- c(well_locations, i)
       well_found <- FALSE
     }
