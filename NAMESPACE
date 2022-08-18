@@ -2,9 +2,5 @@
 
 export(tecan_parse)
 export(tecan_read_temperature)
-import(tibble)
 importFrom(data.table,":=")
-importFrom(dplyr,slice)
 importFrom(magrittr,"%>%")
-importFrom(readxl,read_xlsx)
-importFrom(stringr,str_detect)

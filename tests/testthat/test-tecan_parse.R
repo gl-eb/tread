@@ -11,4 +11,3 @@ test_that("parser expects sheet number as numeric", {
   xlsx_path <- system.file("extdata", xlsx_file, package = "tecanr")
   expect_error(tecan_read_temperature(xlsx_path, "2"))
 })
-
