@@ -45,11 +45,11 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
                multiple_reads == FALSE) {
       # detect if multiple reads per well were taken
       multiple_reads <- TRUE
-      print("Multiple reads per well detected")
+      writeLines("Multiple reads per well detected")
     } else if (stringr::str_detect(dat_raw[i, 1], "Cycle")) {
       # detect if measurements are time series
       time_series <- TRUE
-      print("Time series detected")
+      writeLines("Time series detected")
     } else if (multiple_reads && time_series) {
       break
     }
