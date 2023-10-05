@@ -21,8 +21,8 @@ Imports:
     readxl,
     stringr,
     tibble,
-    utils
-Suggests: 
+    tidyselect
+Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Depends:

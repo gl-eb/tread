@@ -1,6 +1,7 @@
 # tecanr (development version)
 
 - Generate README from Rmarkdown document
+- Import tidyselect now that `where()` is exported
 
 # tecanr 0.3.2
 

@@ -45,7 +45,7 @@ tecan_time_series_multiple_reads <- function(dat_raw) {
     # vector of columns to include in data (columns of NA are filtered out)
     # magrittr pipe %>% necessary due to complex select condition
     cols <- dat_raw[well_locations[well], ] %>%
-      dplyr::select(!(where(~ all(is.na(.x))))) |>
+      dplyr::select(!(tidyselect::where(~ all(is.na(.x))))) |>
       seq_along()
     # compose tibble for current well
     dat_well <- dat_raw[rows, cols] |>
