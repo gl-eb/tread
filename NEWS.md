@@ -1,3 +1,7 @@
+# tecanr (development version)
+
+- Generate README from Rmarkdown document
+
 # tecanr 0.3.2
 
 - Use writeLines() instead of print() to avoid line numbers
