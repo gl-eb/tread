@@ -18,6 +18,9 @@
 #'
 #' @export
 tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
+  # set options within the scope of this function
+  withr::local_options(list(rlib_name_repair_verbosity = "quiet"))
+
   # check function arguments for validity
 
   if (!(is.character(xlsx_file))) {
