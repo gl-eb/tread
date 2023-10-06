@@ -11,7 +11,7 @@ tecan_parse(xlsx_file, xlsx_sheet = 1)
 \arguments{
 \item{xlsx_file}{(character) path to Excel file}
 
-\item{xlsx_sheet}{(numeric) number of Excel sheet to read (default: 1)}
+\item{xlsx_sheet}{(numeric) index of Excel sheet to read (default: 1)}
 }
 \value{
 (tibble) long format data

@@ -3,7 +3,7 @@
 #' per well), and reads the data
 #'
 #' @param xlsx_file (character) path to Excel file
-#' @param xlsx_sheet (numeric) number of Excel sheet to read (default: 1)
+#' @param xlsx_sheet (numeric) index of Excel sheet to read (default: 1)
 #'
 #' @return (tibble) long format data
 #'
