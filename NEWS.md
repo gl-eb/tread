@@ -2,7 +2,8 @@
 
 - Generate README from Rmarkdown document
 - Import tidyselect now that `where()` is exported
-- Use fs and cli functions (such as `fs::file_exists()` and `cli::cli_abort()`) for argument validation
+- Use fs functions such as `fs::file_exists()` for argument validation
+- Use cli functions such as `cli::cli_abort()` for messaging
 - Improvements to documentation
 - Fix automated testing
 - Hide messages telling the user that column names were automatically repaired

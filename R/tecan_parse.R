@@ -61,11 +61,11 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
                multiple_reads == FALSE) {
       # detect if multiple reads per well were taken
       multiple_reads <- TRUE
-      message("Multiple reads per well detected")
+      cli::cli_inform(c("i" = "Multiple reads per well detected"))
     } else if (stringr::str_detect(dat_raw[i, 1], "Cycle")) {
       # detect if measurements are time series
       time_series <- TRUE
-      message("Time series detected")
+      cli::cli_inform(c("i" = "Time series detected"))
     } else if (multiple_reads && time_series) {
       break
     }
@@ -83,7 +83,7 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
     }
   } else {
     # if single read per well was taken
-    message("Single reads per well are not supported currently")
+    cli::cli_warn(c("!" = "Single reads per well are not supported currently"))
     if (time_series) {
       # if data is time series of single reads per well
     } else {
