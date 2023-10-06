@@ -2,6 +2,7 @@
 
 - Generate README from Rmarkdown document
 - Import tidyselect now that `where()` is exported
+- Use fs and cli functions (such as `fs::file_exists()` and `cli::cli_abort()`) for argument validation
 
 # tecanr 0.3.2
 
