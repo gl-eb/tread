@@ -1,3 +1,27 @@
+if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data"))
+
+#' Stitch together segments of time series measurements
+#'
+#' Parses a Tecan Infinite 200 Pro plate reader Excel file that contains
+#' segments of a time series spread over multiple sheets and automatically
+#' stitches them together accounting for the time gap between them
+#'
+#' @param xlsx_file (character) path to Excel file
+#' @param segments (numeric) number of segments to stitch together, starting
+#' from the last sheet (default: number of sheets)
+#'
+#' @return A [tibble::tibble()] containing tidy data
+#'
+#' @examples
+#' dat <- assemble_data_segments(
+#'   system.file(
+#'     "extdata",
+#'     "tecan_time_series_segments.xlsx",
+#'     package = "tecanr"
+#'   )
+#' )
+#'
+#' @export
 assemble_data_segments <- function(xlsx_file, segments = NULL) {
   # get number of sheets in xlsx file
   sheets <- readxl::excel_sheets(xlsx_file) |> length()
