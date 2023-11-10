@@ -1,4 +1,12 @@
-assemble_data_segments <- function(file, segments) {
+assemble_data_segments <- function(file, segments = NULL) {
+  # get number of sheets in xlsx file
+  sheets <- readxl::excel_sheets(file) |> length()
+
+  # if user does not provide number of segments, use number of sheets
+  if (is.null(segments)) {
+    segments <- sheets
+  }
+
   # initiate empty tibbles
   dat_raw <- tibble()
   time_offsets <- tibble(
