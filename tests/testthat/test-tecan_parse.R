@@ -7,7 +7,7 @@ test_that("parser expects valid file path", {
 })
 
 test_that("parser expects sheet number as numeric", {
-  xlsx_file <- "tecan_timeSeries_multiReads.xlsx"
+  xlsx_file <- "tecan_time_series_multi_reads.xlsx"
   xlsx_path <- system.file("extdata", xlsx_file, package = "tecanr")
   expect_error(tecan_parse(xlsx_path, "2"))
 })
