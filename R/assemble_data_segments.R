@@ -40,53 +40,56 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
 
   if (segments > sheets) {
     cli::cli_abort(c(
-      "x" = "{.var segments} is greater than the number of sheets",
+      "x" = "{.var segments} is greater than the number of sheets"
     ))
   }
 
   # initiate empty tibbles
-  dat_raw <- tibble()
-  time_offsets <- tibble(
+  dat_raw <- tibble::tibble()
+  time_offsets <- tibble::tibble(
     segment = numeric(),
-    start = ymd_hms(),
-    duration = duration(),
-    end = ymd_hms()
+    start = lubridate::ymd_hms(),
+    duration = lubridate::duration(),
+    end = lubridate::ymd_hms()
   )
 
   # loop through all data-containing sheets
   for (s in seq(segments)) {
     # import excel sheet as a whole to extract starting time and duration
-    start_raw <- read_xlsx(
+    dat_raw <- readxl::read_xlsx(
         xlsx_file,
         sheet = segments - s + 1,
         col_names = FALSE
-    ) |>
-      select(1:2) |>
-      filter(...1 == "Date:" | ...1 == "Time:") |>
-      pull(...2) |>
+    )
+    col_1 <- names(dat_raw)[1]
+    col_2 <- names(dat_raw)[2]
+    start_raw <- dat_raw |>
+      dplyr::select(1:2) |>
+      dplyr::filter({{ col_1}} == "Date:" | {{ col_1 }} == "Time:") |>
+      dplyr::pull({{ col_2 }}) |>
       suppressMessages()
-    start_datetime <- str_glue(
+    start_datetime <- stringr::str_glue(
         "{convert_to_date(start_raw[1])} {start_raw[2]}"
       ) |>
-      ymd_hms()
+      lubridate::ymd_hms()
 
     # import data starting from the back (# data-segments - current_index + 1)
-    dat_sheet <- tecan_parse(xlsx_file, xlsx_sheet = segments - s + 1)
+    dat_sheet <- tecanr::tecan_parse(xlsx_file, xlsx_sheet = segments - s + 1)
 
     # calculate the duration of the current segment
     segment_duration <- dat_sheet |>
-      pull(time) |>
+      dplyr::pull("time") |>
       as.double() |>
       max(na.rm = TRUE) |>
-      dseconds()
+      lubridate::dseconds()
 
     # update offsets table
     time_offsets <- time_offsets |>
-      add_row(
+      tibble::add_row(
         segment = s,
         start = start_datetime,
         duration = segment_duration,
-        end = start_datetime + duration
+        end = start_datetime + .data$duration
       )
 
     # if current segment is not the first, add duration of data so far as well
@@ -94,19 +97,19 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
     if (s > 1) {
       # get end datetime of previous segment
       previous_end <- time_offsets |>
-        filter(segment == s - 1) |>
-        pull(end)
+        dplyr::filter(.data$segment == s - 1) |>
+        dplyr::pull(.data$end)
       current_start <- time_offsets |>
-        filter(segment == s) |>
-        pull(start)
+        dplyr::filter(.data$segment == s) |>
+        dplyr::pull(.data$start)
 
       # get the time offset for the current sheet
-      current_offset <- as.duration(current_start - previous_end)
+      current_offset <- lubridate::as.duration(current_start - previous_end)
 
       # stop if no offset found
-      if (is_empty(current_offset)) {
+      if (rlang::is_empty(current_offset)) {
         cli::cli_abort(c(
-            "x" = "No time offset found for data segment {segment}"
+          "x" = "No time offset found for data segment {segment}"
         ))
       }
 
@@ -115,7 +118,9 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
     }
 
     # bind current segment to raw data
-    dat_raw <- dat_raw |> bind_rows(dat_sheet) |> arrange(well, time)
+    dat_raw <- dat_raw |>
+      dplyr::bind_rows(dat_sheet) |>
+      dplyr::arrange(.data$well, .data$time)
   }
 
   return(dat_raw)
