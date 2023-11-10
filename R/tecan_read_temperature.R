@@ -21,7 +21,6 @@ tecan_read_temperature <- function(xlsx_file, xlsx_sheet = 1) {
   # check function arguments for validity
 
   if (!(is.character(xlsx_file))) {
-    # stop("File path must be a non empty character")
     cli::cli_abort(c(
             "{.var xlsx_file} must be a character",
       "x" = "You've supplied a {.cls {class(xlsx_file)}}."
