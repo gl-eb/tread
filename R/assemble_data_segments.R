@@ -1,0 +1,81 @@
+assemble_data_segments <- function(file, segments, current_cycle,
+                                   current_temperature) {
+  # initiate empty tibbles
+  dat_raw <- tibble()
+  time_offsets <- tibble(
+    gc_cycle = numeric(),
+    segment = numeric(),
+    start = ymd_hms(),
+    duration = duration(),
+    end = ymd_hms()
+  )
+
+  # loop through all data-containing sheets
+  for (s in seq(segments)) {
+    # import excel sheet as a whole to extract starting time and duration
+    start_raw <- read_xlsx(file, sheet = segments - s + 1, col_names = FALSE) |>
+      select(1:2) |>
+      filter(...1 == "Date:" | ...1 == "Time:") |>
+      pull(...2) |>
+      suppressMessages()
+    start_datetime <- str_glue(
+        "{convert_to_date(start_raw[1])} {start_raw[2]}"
+      ) |>
+      ymd_hms()
+
+    # import data starting from the back (# data-segments - current_index + 1)
+    dat_sheet <- file |>
+      tecan_parse(xlsx_sheet = segments - s + 1) |>
+      process_raw_data(current_cycle, current_temperature) |>
+      suppressMessages()
+
+    # calculate the duration of the current segment
+    segment_duration <- dat_sheet |>
+      pull(time) |>
+      as.double() |>
+      max(na.rm = TRUE) |>
+      dseconds()
+
+    # update offsets table
+    time_offsets <- time_offsets |>
+      add_row(
+        gc_cycle = current_cycle,
+        segment = s,
+        start = start_datetime,
+        duration = segment_duration,
+        end = start_datetime + duration
+      )
+
+    # if current segment is not the first, add duration of data so far as well
+    # as offset to time column
+    if (s > 1) {
+      # get end datetime of previous segment
+      previous_end <- time_offsets |>
+        filter(gc_cycle == current_cycle & segment == s - 1) |>
+        pull(end)
+      current_start <- time_offsets |>
+        filter(gc_cycle == current_cycle & segment == s) |>
+        pull(start)
+
+      # get the time offset for the current sheet
+      current_offset <- as.duration(current_start - previous_end)
+
+      # stop if no offset found
+      if (is_empty(current_offset)) {
+        warning_offset <- str_glue(
+          "No time offset found for data segments of cycle {cycle}"
+        )
+        rlang::warn(warning_offset)
+        break
+      }
+
+      dat_sheet$time <- dat_sheet$time + max(dat_raw$time) + current_offset |>
+        as.double()
+    }
+
+    # bind current segment to raw data
+    dat_raw <- dat_raw |> bind_rows(dat_sheet) |> arrange(well, time)
+  }
+
+  return(dat_raw)
+}
