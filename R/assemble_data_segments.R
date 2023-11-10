@@ -34,7 +34,6 @@ assemble_data_segments <- function(file, segments) {
     # update offsets table
     time_offsets <- time_offsets |>
       add_row(
-        gc_cycle = current_cycle,
         segment = s,
         start = start_datetime,
         duration = segment_duration,
@@ -57,11 +56,9 @@ assemble_data_segments <- function(file, segments) {
 
       # stop if no offset found
       if (is_empty(current_offset)) {
-        warning_offset <- str_glue(
-          "No time offset found for data segments of cycle {cycle}"
-        )
-        rlang::warn(warning_offset)
-        break
+        cli::cli_abort(c(
+            "x" = "No time offset found for data segment {segment}"
+        ))
       }
 
       dat_sheet$time <- dat_sheet$time + max(dat_raw$time) + current_offset |>
