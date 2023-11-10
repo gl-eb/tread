@@ -1,10 +1,23 @@
-assemble_data_segments <- function(file, segments = NULL) {
+assemble_data_segments <- function(xlsx_file, segments = NULL) {
   # get number of sheets in xlsx file
-  sheets <- readxl::excel_sheets(file) |> length()
+  sheets <- readxl::excel_sheets(xlsx_file) |> length()
 
   # if user does not provide number of segments, use number of sheets
   if (is.null(segments)) {
     segments <- sheets
+  }
+
+  if (!(is.character(xlsx_file))) {
+    cli::cli_abort(c(
+            "{.var xlsx_file} must be a character",
+      "x" = "You've supplied a {.cls {class(xlsx_file)}}."
+    ))
+  }
+
+  if (segments > sheets) {
+    cli::cli_abort(c(
+      "x" = "{.var segments} is greater than the number of sheets",
+    ))
   }
 
   # initiate empty tibbles
@@ -19,7 +32,11 @@ assemble_data_segments <- function(file, segments = NULL) {
   # loop through all data-containing sheets
   for (s in seq(segments)) {
     # import excel sheet as a whole to extract starting time and duration
-    start_raw <- read_xlsx(file, sheet = segments - s + 1, col_names = FALSE) |>
+    start_raw <- read_xlsx(
+        xlsx_file,
+        sheet = segments - s + 1,
+        col_names = FALSE
+    ) |>
       select(1:2) |>
       filter(...1 == "Date:" | ...1 == "Time:") |>
       pull(...2) |>
@@ -30,7 +47,7 @@ assemble_data_segments <- function(file, segments = NULL) {
       ymd_hms()
 
     # import data starting from the back (# data-segments - current_index + 1)
-    dat_sheet <- tecan_parse(file, xlsx_sheet = segments - s + 1)
+    dat_sheet <- tecan_parse(xlsx_file, xlsx_sheet = segments - s + 1)
 
     # calculate the duration of the current segment
     segment_duration <- dat_sheet |>
