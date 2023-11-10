@@ -1,9 +1,7 @@
-assemble_data_segments <- function(file, segments, current_cycle,
-                                   current_temperature) {
+assemble_data_segments <- function(file, segments) {
   # initiate empty tibbles
   dat_raw <- tibble()
   time_offsets <- tibble(
-    gc_cycle = numeric(),
     segment = numeric(),
     start = ymd_hms(),
     duration = duration(),
@@ -24,10 +22,7 @@ assemble_data_segments <- function(file, segments, current_cycle,
       ymd_hms()
 
     # import data starting from the back (# data-segments - current_index + 1)
-    dat_sheet <- file |>
-      tecan_parse(xlsx_sheet = segments - s + 1) |>
-      process_raw_data(current_cycle, current_temperature) |>
-      suppressMessages()
+    dat_sheet <- tecan_parse(file, xlsx_sheet = segments - s + 1)
 
     # calculate the duration of the current segment
     segment_duration <- dat_sheet |>
@@ -51,10 +46,10 @@ assemble_data_segments <- function(file, segments, current_cycle,
     if (s > 1) {
       # get end datetime of previous segment
       previous_end <- time_offsets |>
-        filter(gc_cycle == current_cycle & segment == s - 1) |>
+        filter(segment == s - 1) |>
         pull(end)
       current_start <- time_offsets |>
-        filter(gc_cycle == current_cycle & segment == s) |>
+        filter(segment == s) |>
         pull(start)
 
       # get the time offset for the current sheet
