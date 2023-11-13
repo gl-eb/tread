@@ -30,3 +30,4 @@ Suggests:
 Config/testthat/edition: 3
 Depends:
     R (>= 4.1.0)
+URL: http://www.gl-eb.me/tecanr/, https://github.com/gl-eb/tecanr/
