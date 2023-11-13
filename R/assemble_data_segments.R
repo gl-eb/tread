@@ -108,7 +108,7 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
 
     # if current segment is not the first, add duration of data so far as well
     # as offset to time column
-    if (s > 1) {
+    if (nrow(time_offsets) > 1) {
       # get end datetime of previous segment
       previous_end <- time_offsets |>
         dplyr::filter(.data$segment == s - 1) |>
@@ -123,7 +123,7 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
       # stop if no offset found
       if (rlang::is_empty(current_offset)) {
         cli::cli_abort(c(
-          "x" = "No time offset found for data segment {segment}"
+          "x" = "No time offset found for data segment {s}"
         ))
       }
 
