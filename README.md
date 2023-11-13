@@ -15,6 +15,9 @@ of the data in the spreadsheets.
 
 tecanr is currently in an unfinished state, so use with caution.
 
+Tecan® is a trademark of Tecan Group Ltd., Männedorf, Switzerland. I
+have no affiliation with them other than being a user of their products.
+
 ## Installation
 
 You can install tecanr from [GitHub](https://github.com/gl-eb/tecanr)
