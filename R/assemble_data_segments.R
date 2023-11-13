@@ -70,11 +70,15 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
     col_1 <- names(dat_raw)[1]
     col_2 <- names(dat_raw)[2]
     start_raw <- dat_raw |>
-      dplyr::select(1:2) |>
-      dplyr::filter({{ col_1}} == "Date:" | {{ col_1 }} == "Time:") |>
+      dplyr::select({{ col_1 }}:{{ col_2 }}) |>
+      dplyr::filter(
+        .data[[col_1]] == "Date:" |
+        .data[[col_1]] == "Time:"
+      ) |>
       dplyr::pull({{ col_2 }})
-    start_datetime <- stringr::str_glue(
-        "{convert_to_date(start_raw[1])} {start_raw[2]}"
+    start_datetime <- paste(
+        janitor::convert_to_date(start_raw[1]),
+        start_raw[2]
       ) |>
       lubridate::ymd_hms()
 
