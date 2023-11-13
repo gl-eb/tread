@@ -93,5 +93,10 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
     }
   }
 
+  # clean up column names and covert numbers to numeric
+  dat <- dat |>
+    janitor::clean_names() |>
+    dplyr::mutate(dplyr::across(2:tidyselect::last_col(), as.numeric))
+
   return(dat)
 }
