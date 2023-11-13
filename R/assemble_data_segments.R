@@ -61,6 +61,11 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
         sheet = segments - s + 1,
         col_names = FALSE
     )
+
+    # skip rest of loop if sheet empty
+    if (nrow(dat_raw) == 0) next
+
+    # extract starting time and duration of segment
     col_1 <- names(dat_raw)[1]
     col_2 <- names(dat_raw)[2]
     start_raw <- dat_raw |>
