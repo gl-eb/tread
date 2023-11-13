@@ -1,9 +1,11 @@
-#' Reads a single time point of multiple OD measurements per well from a tecan
-#' plate reader excel file
+#' Read multiple measurements per well
+#'
+#' [tecan_single_time_multiple_reads()] gets a Tecan plate reader measurement
+#' from an Excel file when multiple readings of each well were taken
 #'
 #' @param dat_raw (tibble) a excel sheet
 #'
-#' @return (tibble) long format data
+#' @return A [tibble::tibble()] containing tidy data
 tecan_single_time_multiple_reads <- function(dat_raw) {
   # initialize variables and vectors for data search
   data_start <- numeric()

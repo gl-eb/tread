@@ -1,11 +1,14 @@
-#' Parses a Tecan Infinite 200 Pro plate reader excel file, determines the type
-#' of measurement (single time point or time series, single or multiple reads
-#' per well), and reads the data
+#' Parse a Tecan Infinite 200 Pro plate reader file
+#'
+#' [tecan_parse()] reads data from a the Excel file produced by a Tecan
+#' Infinite 200 Pro plate reader. It automatically determines the type of
+#' measurement (single time point or time series, single or multiple reads
+#' per well) and will handle the data appropriately.
 #'
 #' @param xlsx_file (character) path to Excel file
-#' @param xlsx_sheet (numeric) index of Excel sheet to read (default: 1)
+#' @param xlsx_sheet (numeric) index of Excel sheet to read from (default: 1)
 #'
-#' @return (tibble) long format data
+#' @return A [tibble::tibble()] containing tidy data
 #'
 #' @examples
 #' dat <- tecan_parse(

@@ -1,4 +1,4 @@
-#' Raw Tecan Infinite 200 Pro data
+#' Raw data for conversion to long format
 #'
 #' Four datasets of Tecan Infinite 200 Pro runs that use different combinations
 #' of two parameters: single timepoint measurement or timeseries of measurements

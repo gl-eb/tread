@@ -2,8 +2,7 @@
 % Please edit documentation in R/tecan_read_temperature.R
 \name{tecan_read_temperature}
 \alias{tecan_read_temperature}
-\title{Reads the temperature readings corresponding to a timeseries of Tecan
-Infinite 200 Pro measurements}
+\title{Get time series of temperature values}
 \usage{
 tecan_read_temperature(xlsx_file, xlsx_sheet = 1)
 }
@@ -12,9 +11,12 @@ tecan_read_temperature(xlsx_file, xlsx_sheet = 1)
 
 \item{xlsx_sheet}{(numeric) index of Excel sheet to read (default: 1)}
 }
+\value{
+A \code{\link[tibble:tibble]{tibble::tibble()}} containing tidy data
+}
 \description{
-Reads the temperature readings corresponding to a timeseries of Tecan
-Infinite 200 Pro measurements
+\code{\link[=tecan_read_temperature]{tecan_read_temperature()}} gets the temperature readings corresponding to a
+timeseries of Tecan Infinite 200 Pro measurements from an Excel file
 }
 \examples{
 tecan_read_temperature(

@@ -1,8 +1,12 @@
-#' Reads the temperature readings corresponding to a timeseries of Tecan
-#' Infinite 200 Pro measurements
+#' Get time series of temperature values
+#'
+#' [tecan_read_temperature()] gets the temperature readings corresponding to a
+#' timeseries of Tecan Infinite 200 Pro measurements from an Excel file
 #'
 #' @param xlsx_file (character) path to Excel file
 #' @param xlsx_sheet (numeric) index of Excel sheet to read (default: 1)
+#'
+#' @return A [tibble::tibble()] containing tidy data
 #'
 #' @examples
 #' tecan_read_temperature(

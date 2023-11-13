@@ -1,9 +1,12 @@
-#' Reads a time series of multiple OD measurements per well from a tecan plate
-#' reader excel file
+#' Read a time series of multiple measurements per well
 #'
-#' @param dat_raw (tibble) a excel sheet
+#' [tecan_time_series_multiple_reads()] gets a series of Tecan plate reader
+#' measurements from an Excel file when each timepoint contains multiple
+#' readings of each well
 #'
-#' @return (tibble) long format data
+#' @param dat_raw (tibble) an Excel sheet as returned by [readxl::read_xlsx()]
+#'
+#' @return A [tibble::tibble()] containing tidy data
 #'
 #' @importFrom data.table :=
 #' @importFrom magrittr %>%

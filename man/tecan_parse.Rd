@@ -2,24 +2,23 @@
 % Please edit documentation in R/tecan_parse.R
 \name{tecan_parse}
 \alias{tecan_parse}
-\title{Parses a Tecan Infinite 200 Pro plate reader excel file, determines the type
-of measurement (single time point or time series, single or multiple reads
-per well), and reads the data}
+\title{Parse a Tecan Infinite 200 Pro plate reader file}
 \usage{
 tecan_parse(xlsx_file, xlsx_sheet = 1)
 }
 \arguments{
 \item{xlsx_file}{(character) path to Excel file}
 
-\item{xlsx_sheet}{(numeric) index of Excel sheet to read (default: 1)}
+\item{xlsx_sheet}{(numeric) index of Excel sheet to read from (default: 1)}
 }
 \value{
-(tibble) long format data
+A \code{\link[tibble:tibble]{tibble::tibble()}} containing tidy data
 }
 \description{
-Parses a Tecan Infinite 200 Pro plate reader excel file, determines the type
-of measurement (single time point or time series, single or multiple reads
-per well), and reads the data
+\code{\link[=tecan_parse]{tecan_parse()}} reads data from a the Excel file produced by a Tecan
+Infinite 200 Pro plate reader. It automatically determines the type of
+measurement (single time point or time series, single or multiple reads
+per well) and will handle the data appropriately.
 }
 \examples{
 dat <- tecan_parse(
