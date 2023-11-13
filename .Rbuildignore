@@ -7,3 +7,6 @@
 ^README\.Rmd$
 ^\.github$
 ^.*\.code-workspace$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
