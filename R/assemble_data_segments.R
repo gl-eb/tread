@@ -57,10 +57,11 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
   for (s in seq(segments)) {
     # import excel sheet as a whole to extract starting time and duration
     dat_raw <- readxl::read_xlsx(
-        xlsx_file,
-        sheet = segments - s + 1,
-        col_names = FALSE
-    )
+          xlsx_file,
+          sheet = segments - s + 1,
+          col_names = FALSE
+      ) |>
+      suppressMessages()
 
     # skip rest of loop if sheet empty
     if (nrow(dat_raw) == 0) next
@@ -71,8 +72,7 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
     start_raw <- dat_raw |>
       dplyr::select(1:2) |>
       dplyr::filter({{ col_1}} == "Date:" | {{ col_1 }} == "Time:") |>
-      dplyr::pull({{ col_2 }}) |>
-      suppressMessages()
+      dplyr::pull({{ col_2 }})
     start_datetime <- stringr::str_glue(
         "{convert_to_date(start_raw[1])} {start_raw[2]}"
       ) |>
