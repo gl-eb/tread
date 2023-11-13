@@ -45,7 +45,7 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
   }
 
   # initiate empty tibbles
-  dat_raw <- tibble::tibble()
+  dat_ass <- tibble::tibble()
   time_offsets <- tibble::tibble(
     segment = numeric(),
     start = lubridate::ymd_hms(),
@@ -127,15 +127,15 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
         ))
       }
 
-      dat_sheet$time <- dat_sheet$time + max(dat_raw$time) + current_offset |>
+      dat_sheet$time <- dat_sheet$time + max(dat_ass$time) + current_offset |>
         as.double()
     }
 
     # bind current segment to raw data
-    dat_raw <- dat_raw |>
+    dat_ass <- dat_ass |>
       dplyr::bind_rows(dat_sheet) |>
       dplyr::arrange(.data$well, .data$time)
   }
 
-  return(dat_raw)
+  return(dat_ass)
 }
