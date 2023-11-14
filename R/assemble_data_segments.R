@@ -23,6 +23,13 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data"))
 #'
 #' @export
 assemble_data_segments <- function(xlsx_file, segments = NULL) {
+  if (!(is.character(xlsx_file))) {
+    cli::cli_abort(c(
+            "{.var xlsx_file} must be a character",
+      "x" = "You've supplied a {.cls {class(xlsx_file)}}."
+    ))
+  }
+
   # get number of sheets in xlsx file
   sheets <- readxl::excel_sheets(xlsx_file) |> length()
 
@@ -31,16 +38,14 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
     segments <- sheets
   }
 
-  if (!(is.character(xlsx_file))) {
-    cli::cli_abort(c(
-            "{.var xlsx_file} must be a character",
-      "x" = "You've supplied a {.cls {class(xlsx_file)}}."
-    ))
-  }
-
   if (segments > sheets) {
     cli::cli_abort(c(
       "x" = "{.var segments} is greater than the number of sheets"
+    ))
+  } else if (segments < 1) {
+    cli::cli_abort(c(
+            "{.var segments} must be >= 1",
+      "x" = "You set {.var segments = {segments}}"
     ))
   }
 
@@ -64,7 +69,7 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
       suppressMessages()
 
     # skip rest of loop if sheet empty
-    if (nrow(dat_raw) == 0) next
+    if (nrow(dat_raw) == 0 | ncol(dat_raw) <= 1) next
 
     # extract starting time and duration of segment
     col_1 <- names(dat_raw)[1]
@@ -76,6 +81,14 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
         .data[[col_1]] == "Time:"
       ) |>
       dplyr::pull({{ col_2 }})
+
+    # stop if datetime detection returns anything other than two rows
+    if (length(start_raw) != 2) {
+      cli::cli_abort(c(
+        "x" = "No valid data found in segment {s}"
+      ))
+    }
+
     start_datetime <- paste(
         janitor::convert_to_date(start_raw[1]),
         start_raw[2]
@@ -124,6 +137,11 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
       if (rlang::is_empty(current_offset)) {
         cli::cli_abort(c(
           "x" = "No time offset found for data segment {s}"
+        ))
+      } else if (current_offset < 0) {
+        cli::cli_abort(c(
+                "Time offsets between segments should be positive",
+          "x" = "Time offset between segments {s-1} and {s} is {current_offset}"
         ))
       }
 
