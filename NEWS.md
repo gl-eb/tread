@@ -1,5 +1,9 @@
 # tecanr (development version)
 
+- `tecan_parse()` now returns a `tibble::tibble()` with clean column names and correct column types
+- Create pkgdown website
+- Enable GitHub CI
+- Expand unit testing
 - Generate README from Rmarkdown document
 - Import tidyselect now that `where()` is exported
 - Use fs functions such as `fs::file_exists()` for argument validation
