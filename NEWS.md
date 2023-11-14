@@ -1,5 +1,6 @@
 # tecanr (development version)
 
+- Add `assemble_data_segments()` for stitching together time series measurements when the plate reader programme was stopped and restarted
 - `tecan_parse()` now returns a `tibble::tibble()` with clean column names and correct column types
 - Create pkgdown website
 - Enable GitHub CI
