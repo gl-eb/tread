@@ -28,7 +28,6 @@ Imports:
     magrittr,
     purrr,
     readxl,
-    rlang,
     stringr,
     tibble,
     tidyselect,

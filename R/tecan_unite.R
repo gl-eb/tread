@@ -54,6 +54,13 @@ tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
     segments <- sheets
   }
 
+  # check validity of segments argument
+  if (!is.numeric(segments)) {
+    cli::cli_abort(c(
+            "{.var segments} must be a number",
+      "x" = "You've supplied a {.cls {class(segments)}}."
+    ))
+  }
   if ((segments + skip) > sheets) {
     cli::cli_abort(c(
       paste(
@@ -100,7 +107,8 @@ tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
         .data[[col_1]] == "Date:" |
         .data[[col_1]] == "Time:"
       ) |>
-      dplyr::pull({{ col_2 }})
+      dplyr::pull({{ col_2 }}) |>
+      unique()
 
     # stop if datetime detection returns anything other than two rows
     if (length(start_raw) != 2) {
@@ -153,12 +161,7 @@ tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
       # get the time offset for the current sheet
       current_offset <- lubridate::as.duration(current_start - previous_end)
 
-      # stop if no offset found
-      if (rlang::is_empty(current_offset)) {
-        cli::cli_abort(c(
-          "x" = "No time offset found for data segment {s}"
-        ))
-      } else if (current_offset < 0) {
+      if (current_offset < 0) {
         cli::cli_abort(c(
                 "Time offsets between segments should be positive",
           "x" = "Time offset between segments {s-1} and {s} is {current_offset}"

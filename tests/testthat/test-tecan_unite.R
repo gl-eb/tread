@@ -1,7 +1,7 @@
 # the tests of tecan_unite() make heavy use of test helpers
 # these can be found in tests/testthat/helper.R
 
-# test correct functioning of tecan_unite() -------------------------
+# test correct functioning of tecan_unite() ------------------------------------
 
 test_that("tecan_unite() runs without errors", {
   expect_no_error(test_unite())
@@ -24,18 +24,14 @@ test_that("tecan_unite() returns tibble", {
 
 # test detection of non-compliant arguments ------------------------------------
 
-test_that("file path is string in tecan_unite()", {
-  expect_error(
-    tecan_unite(3),
-    "must be a character"
-  )
+test_that("file path is valid in tecan_unite()", {
+  expect_error(tecan_unite(3), "must be a character")
+  expect_error(tecan_unite("test.xlsx"), "does not exist")
 })
 
-test_that("file path is valid in tecan_unite()", {
-  expect_error(
-    tecan_unite("test.xlsx"),
-    "does not exist"
-  )
+test_that("numeric tecan_unite() arguments are numeric", {
+  expect_error(test_unite(segments = "2"), "must be a number")
+  expect_error(test_unite(skip = "0"), "must be a number")
 })
 
 test_that("(segments + skip <= sheets) in tecan_unite()", {
@@ -48,11 +44,16 @@ test_that("segments >= 1 in tecan_unite()", {
   expect_error(test_unite(segments = -3), "`segments` must be >= 1")
 })
 
+test_that("skip >= 0 in tecan_unite()", {
+  expect_error(test_unite(skip = -1), "`skip` must be >= 0")
+})
+
 test_that("tecan_unite() ignores sheets with invalid data", {
-  expect_no_error(
+  expect_error(
     test_path("fixtures", "time_series_invalid_sheet.xlsx") |>
     tecan_unite() |>
-    suppressMessages()
+    suppressMessages(),
+    "No valid data"
   )
 })
 
