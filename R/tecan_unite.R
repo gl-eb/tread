@@ -15,7 +15,7 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data"))
 #' @return A [tibble::tibble()] containing tidy data
 #'
 #' @examples
-#' dat <- assemble_data_segments(
+#' dat <- tecan_unite(
 #'   system.file(
 #'     "extdata",
 #'     "tecan_time_series_segments.xlsx",
@@ -24,7 +24,7 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data"))
 #' )
 #'
 #' @export
-assemble_data_segments <- function(xlsx_file, segments = NULL, skip = 0) {
+tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
   # check argument type and validity
   if (!(is.character(xlsx_file))) {
     cli::cli_abort(c(

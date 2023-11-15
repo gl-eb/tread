@@ -12,7 +12,7 @@ reference:
   contents:
   - tecan_parse
   - tecan_read_temperature
-  - assemble_data_segments
+  - tecan_unite
 
 - title: Convert to Tidy Format
   desc: >
