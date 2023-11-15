@@ -1,3 +1,37 @@
+# test correct functioning of tecan_parse() ------------------------------------
+
+test_that("tecan_parse() runs successfully for all data formats", {
+  expect_error(
+    file_single_time_single_reads() |> tecan_parse()
+  )
+  expect_no_error(
+    file_single_time_multi_reads() |> tecan_parse()
+  )
+  expect_error(
+    file_time_series_single_reads() |> tecan_parse()
+  )
+  expect_no_error(
+    file_time_series_multi_reads() |> tecan_parse()
+  )
+}) |> suppressMessages()
+
+test_that("tacan_parse() messages correctly", {
+  expect_warning(
+    file_single_time_single_reads() |> tecan_parse()
+  )
+  expect_message(
+    file_single_time_multi_reads() |> tecan_parse()
+  )
+  expect_warning(
+    file_time_series_single_reads() |> tecan_parse()
+  )
+  expect_message(
+    file_time_series_multi_reads() |> tecan_parse()
+  )
+})
+
+# test detection of non-compliant arguments ------------------------------------
+
 test_that("parser expects file path to be a string", {
   expect_error(tecan_parse(3))
 })
@@ -7,7 +41,7 @@ test_that("parser expects valid file path", {
 })
 
 test_that("parser expects sheet number as numeric", {
-  xlsx_file <- "tecan_time_series_multi_reads.xlsx"
-  xlsx_path <- system.file("extdata", xlsx_file, package = "tecanr")
-  expect_error(tecan_parse(xlsx_path, "2"))
+  expect_error(
+    file_single_time_multi_reads() |> tecan_parse("2")
+  )
 })
