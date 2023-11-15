@@ -11,6 +11,14 @@
 #' @importFrom data.table :=
 #' @importFrom magrittr %>%
 tecan_time_series_multiple_reads <- function(dat_raw) {
+  # check input for validity
+  if (!is.data.frame(dat_raw)) {
+    cli::cli_abort(c(
+            "{.var dat_raw} must be a data frame",
+      "x" = "You've supplied a {.cls {class(dat_raw)}}."
+    ))
+  }
+
   # initialize variables and vectors for data search
   well_found <- FALSE
   well_names <- character()

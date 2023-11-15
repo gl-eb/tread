@@ -7,6 +7,14 @@
 #'
 #' @return A [tibble::tibble()] containing tidy data
 tecan_single_time_multiple_reads <- function(dat_raw) {
+  # check input for validity
+  if (!is.data.frame(dat_raw)) {
+    cli::cli_abort(c(
+            "{.var dat_raw} must be a data frame",
+      "x" = "You've supplied a {.cls {class(dat_raw)}}."
+    ))
+  }
+
   # initialize variables and vectors for data search
   data_start <- numeric()
   data_end <- numeric()
