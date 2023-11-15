@@ -1,3 +1,6 @@
+# the tests of tecan_unite() make heavy use of test helpers
+# these can be found in tests/testthat/helper.R
+
 # test correct functioning of tecan_unite() -------------------------
 
 test_that("tecan_unite() runs without errors", {
