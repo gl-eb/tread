@@ -1,7 +1,11 @@
 #' Get time series of temperature values
 #'
-#' [tecan_read_temperature()] gets the temperature readings corresponding to a
-#' timeseries of Tecan Infinite 200 Pro measurements from an Excel file
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' [tecan_read_temperature()] was deprecated because it only supported one type
+#' of data (time series with multiple readings per well) and the same result can
+#' be achieved with [tecan_parse()]
 #'
 #' @param xlsx_file (character) path to Excel file
 #' @param xlsx_sheet (numeric) index of Excel sheet to read (default: 1)
@@ -16,9 +20,27 @@
 #'     package = "tecanr"
 #'   )
 #' )
+#' # ->
+#' tecan_parse(
+#'   system.file(
+#'     "extdata",
+#'     "tecan_time_series_multi_reads.xlsx",
+#'     package = "tecanr"
+#'   )
+#' ) |>
+#' dplyr::select(time_s, temp_c) |>
+#' dplyr::distinct()
+#'
+#' @keywords internal
 #'
 #' @export
 tecan_read_temperature <- function(xlsx_file, xlsx_sheet = 1) {
+  lifecycle::deprecate_warn(
+    "0.4.0",
+    "tecan_read_temperature()",
+    details = "This function is a special case of tecan_parse(); use it instead"
+  )
+
   # set options within the scope of this function
   withr::local_options(list(rlib_name_repair_verbosity = "quiet"))
 

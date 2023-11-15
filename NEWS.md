@@ -2,6 +2,7 @@
 
 - Add `tecan_unite()` for stitching together time series measurements when the plate reader programme was stopped and restarted
 - `tecan_parse()` now returns a `tibble::tibble()` with clean column names and correct column types
+- Deprecated `tecan_read_temperature()` since it is a special case of `tecan_parse()` and much less flexible in regards to the format of the input file
 - Create pkgdown website
 - Enable GitHub CI
 - Expand unit testing

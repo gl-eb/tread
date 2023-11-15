@@ -97,39 +97,3 @@ dat4
 #> 10 A1      5400   30.6 0.101  0.0170 0.0916 0.131 0.0887 0.0989 0.0943
 #> # ℹ 110 more rows
 ```
-
-``` r
-# read temperature over time from example file of multiple timepoint
-# measurements
-dat_temperature <- tecan_read_temperature(
-  system.file(
-    "extdata",
-    "tecan_time_series_multi_reads.xlsx",
-    package = "tecanr"
-  )
-)
-dat_temperature
-#> # A tibble: 20 × 2
-#>     time temperature
-#>    <int>       <dbl>
-#>  1     0        30.6
-#>  2   600        30.3
-#>  3  1200        30.6
-#>  4  1800        30.7
-#>  5  2400        30.5
-#>  6  3000        30.5
-#>  7  3600        30.3
-#>  8  4200        30.4
-#>  9  4800        30.5
-#> 10  5400        30.6
-#> 11  6000        30.8
-#> 12  6600        30.8
-#> 13  7200        31  
-#> 14  7800        30.9
-#> 15  8400        30.9
-#> 16  9000        31.2
-#> 17  9600        31.2
-#> 18 10200        31.3
-#> 19 10800        31  
-#> 20 11400        31.2
-```

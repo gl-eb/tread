@@ -24,6 +24,7 @@ Imports:
     dplyr,
     fs,
     janitor,
+    lifecycle,
     lubridate,
     magrittr,
     purrr,

@@ -15,8 +15,11 @@ tecan_read_temperature(xlsx_file, xlsx_sheet = 1)
 A \code{\link[tibble:tibble]{tibble::tibble()}} containing tidy data
 }
 \description{
-\code{\link[=tecan_read_temperature]{tecan_read_temperature()}} gets the temperature readings corresponding to a
-timeseries of Tecan Infinite 200 Pro measurements from an Excel file
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+\code{\link[=tecan_read_temperature]{tecan_read_temperature()}} was deprecated because it only supported one type
+of data (time series with multiple readings per well) and the same result can
+be achieved with \code{\link[=tecan_parse]{tecan_parse()}}
 }
 \examples{
 tecan_read_temperature(
@@ -26,5 +29,16 @@ tecan_read_temperature(
     package = "tecanr"
   )
 )
+# ->
+tecan_parse(
+  system.file(
+    "extdata",
+    "tecan_time_series_multi_reads.xlsx",
+    package = "tecanr"
+  )
+) |>
+dplyr::select(time_s, temp_c) |>
+dplyr::distinct()
 
 }
+\keyword{internal}
