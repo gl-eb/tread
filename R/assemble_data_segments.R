@@ -8,7 +8,9 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data"))
 #'
 #' @param xlsx_file (character) path to Excel file
 #' @param segments (numeric) number of segments to stitch together, starting
-#' from the last sheet (default: number of sheets)
+#'   from the last sheet (default: number of sheets)
+#' @param skip (numeric) number of sheets to skip, starting with the last sheet
+#'   (default: 0). Note that empty sheets will be skipped automatically
 #'
 #' @return A [tibble::tibble()] containing tidy data
 #'
@@ -22,13 +24,27 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data"))
 #' )
 #'
 #' @export
-assemble_data_segments <- function(xlsx_file, segments = NULL) {
+assemble_data_segments <- function(xlsx_file, segments = NULL, skip = 0) {
+  # check argument type and validity
   if (!(is.character(xlsx_file))) {
     cli::cli_abort(c(
             "{.var xlsx_file} must be a character",
       "x" = "You've supplied a {.cls {class(xlsx_file)}}."
     ))
   }
+  if (!is.numeric(skip)) {
+    cli::cli_abort(c(
+            "{.var skip} must be a number",
+      "x" = "You've supplied a {.cls {class(skip)}}."
+    ))
+  }
+  if (skip < 0) {
+    cli::cli_abort(c(
+            "{.var skip} must be >= 0",
+      "x" = "You have set {.var skip} to {skip}"
+    ))
+  }
+
 
   # get number of sheets in xlsx file
   sheets <- readxl::excel_sheets(xlsx_file) |> length()
@@ -38,9 +54,13 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
     segments <- sheets
   }
 
-  if (segments > sheets) {
+  if ((segments + skip) > sheets) {
     cli::cli_abort(c(
-      "x" = "{.var segments} is greater than the number of sheets"
+      paste(
+        "{.var segments} + {.var skip} must be smaller or equal to the number",
+        "of sheets"
+      ),
+      "x" = "You provided {.val {segments}} + {.val {skip}} > {.val {sheets}}"
     ))
   } else if (segments < 1) {
     cli::cli_abort(c(
@@ -59,7 +79,7 @@ assemble_data_segments <- function(xlsx_file, segments = NULL) {
   )
 
   # loop through all data-containing sheets
-  for (s in seq(segments)) {
+  for (s in seq(skip + 1, segments)) {
     # import excel sheet as a whole to extract starting time and duration
     dat_raw <- readxl::read_xlsx(
           xlsx_file,

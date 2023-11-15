@@ -10,6 +10,33 @@ test_that("function should run without errors", {
     assemble_data_segments() |>
     suppressMessages()
   )
+  expect_no_error(
+    system.file(
+      "extdata",
+      "tecan_time_series_segments.xlsx",
+      package = "tecanr"
+    ) |>
+    assemble_data_segments(segments = 2) |>
+    suppressMessages()
+  )
+  expect_no_error(
+    system.file(
+      "extdata",
+      "tecan_time_series_segments.xlsx",
+      package = "tecanr"
+    ) |>
+    assemble_data_segments(skip = 0) |>
+    suppressMessages()
+  )
+  expect_no_error(
+    system.file(
+      "extdata",
+      "tecan_time_series_segments.xlsx",
+      package = "tecanr"
+    ) |>
+    assemble_data_segments(segments = 2, skip = 0) |>
+    suppressMessages()
+  )
 })
 
 test_that("tecan_parse's messages should be printed", {
@@ -63,7 +90,7 @@ test_that("file path should be valid", {
   )
 })
 
-test_that("expect segments <= sheets", {
+test_that("expect segments + skip <= sheets", {
   expect_error(
     system.file(
       "extdata",
@@ -71,7 +98,16 @@ test_that("expect segments <= sheets", {
       package = "tecanr"
     ) |>
     assemble_data_segments(segments = 4),
-    "`segments` is greater"
+    "must be smaller"
+  )
+  expect_error(
+    system.file(
+      "extdata",
+      "tecan_time_series_segments.xlsx",
+      package = "tecanr"
+    ) |>
+    assemble_data_segments(segments = 3, skip = 1),
+    "must be smaller"
   )
 })
 
