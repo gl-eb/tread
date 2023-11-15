@@ -1,76 +1,21 @@
 # test correct functioning of assemble_data_segments() -------------------------
 
 test_that("function should run without errors", {
-  expect_no_error(
-    system.file(
-      "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
-    ) |>
-    assemble_data_segments() |>
-    suppressMessages()
-  )
-  expect_no_error(
-    system.file(
-      "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
-    ) |>
-    assemble_data_segments(segments = 2) |>
-    suppressMessages()
-  )
-  expect_no_error(
-    system.file(
-      "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
-    ) |>
-    assemble_data_segments(skip = 0) |>
-    suppressMessages()
-  )
-  expect_no_error(
-    system.file(
-      "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
-    ) |>
-    assemble_data_segments(segments = 2, skip = 0) |>
-    suppressMessages()
-  )
-})
+  expect_no_error(test_assemble())
+  expect_no_error(test_assemble(segments = 2))
+  expect_no_error(test_assemble(skip = 0))
+  expect_no_error(test_assemble(segments = 2, skip = 0))
+}) |>
+suppressMessages()
 
 test_that("tecan_parse's messages should be printed", {
-  expect_message(
-    system.file(
-      "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
-    ) |>
-    assemble_data_segments(),
-    "Multiple reads"
-  ) |> suppressMessages()
-  expect_message(
-    system.file(
-      "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
-    ) |>
-    assemble_data_segments(),
-    "Time series"
-  ) |> suppressMessages()
-})
+  expect_message(test_assemble(), "Multiple reads")
+  expect_message(test_assemble(), "Time series")
+}) |>
+suppressMessages()
 
 test_that("output should be tibble", {
-  expect_s3_class(
-    system.file(
-      "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
-    ) |>
-    assemble_data_segments() |>
-    suppressMessages(),
-    "tbl_df"
-  )
+  expect_s3_class(test_assemble(), "tbl_df") |> suppressMessages()
 })
 
 
@@ -91,45 +36,13 @@ test_that("file path should be valid", {
 })
 
 test_that("expect segments + skip <= sheets", {
-  expect_error(
-    system.file(
-      "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
-    ) |>
-    assemble_data_segments(segments = 4),
-    "must be smaller"
-  )
-  expect_error(
-    system.file(
-      "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
-    ) |>
-    assemble_data_segments(segments = 3, skip = 1),
-    "must be smaller"
-  )
+  expect_error(test_assemble(segments = 4), "must be smaller")
+  expect_error(test_assemble(segments = 3, skip = 1), "must be smaller")
 })
 
 test_that("number of segments should be >= 1", {
-  expect_error(
-    system.file(
-      "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
-    ) |>
-    assemble_data_segments(segments = 0),
-    "`segments` must be >= 1"
-  )
-  expect_error(
-    system.file(
-      "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
-    ) |>
-    assemble_data_segments(segments = -3),
-    "`segments` must be >= 1"
-  )
+  expect_error(test_assemble(segments = 0), "`segments` must be >= 1")
+  expect_error(test_assemble(segments = -3), "`segments` must be >= 1")
 })
 
 test_that("sheets with invalid data should be ignored", {
