@@ -35,6 +35,7 @@ tecan_single_time_multiple_reads <- function(dat_raw) {
   dat <- dat_raw[data_start:data_end, ] |>
     janitor::row_to_names(row_number = 1) |>
     purrr::discard(~all(is.na(.) | . == "")) |>
+    dplyr::mutate(dplyr::across(2:tidyselect::last_col(), as.numeric)) |>
     suppressWarnings()
 
   return(dat)

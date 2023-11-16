@@ -71,5 +71,8 @@ tecan_time_series_multiple_reads <- function(dat_raw) {
     dat <- dat |> rbind(dat_well)
   }
 
+  dat <- dat |>
+    dplyr::mutate(dplyr::across(2:tidyselect::last_col(), as.numeric))
+
   return(dat)
 }
