@@ -88,15 +88,13 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
     cli::cli_warn(c("!" = "Single reads per well are not supported currently"))
     if (time_series) {
       # if data is time series of single reads per well
+      dat <- tecan_time_series_single_reads(dat_raw)
     } else {
       # if data is from single time point and a single read per well
     }
   }
 
-  # clean up column names and covert numbers to numeric
-  dat <- dat |>
-    janitor::clean_names() |>
-    dplyr::mutate(dplyr::across(2:tidyselect::last_col(), as.numeric))
+  dat <- dat |> janitor::clean_names()
 
   return(dat)
 }

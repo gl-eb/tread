@@ -7,7 +7,7 @@ test_that("tecan_parse() runs successfully for all data formats", {
   expect_no_error(
     file_single_time_multi_reads() |> tecan_parse()
   )
-  expect_error(
+  expect_no_error(
     file_time_series_single_reads() |> tecan_parse()
   )
   expect_no_error(
@@ -22,8 +22,9 @@ test_that("tacan_parse() messages correctly", {
   expect_message(
     file_single_time_multi_reads() |> tecan_parse()
   )
-  expect_warning(
-    file_time_series_single_reads() |> tecan_parse()
+  expect_message(
+    file_time_series_single_reads() |> tecan_parse(),
+    "Time series detected"
   )
   expect_message(
     file_time_series_multi_reads() |> tecan_parse()
