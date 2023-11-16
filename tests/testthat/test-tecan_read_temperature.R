@@ -2,14 +2,14 @@
 
 test_that("tecan_read_temperature() is deprecated", {
   expect_snapshot(
-    file_time_series_multi_reads() |> tecan_read_temperature()
+    file_time_series_multiple_reads() |> tecan_read_temperature()
   )
 })
 
 test_that("tecan_read_temperature() still works", {
   expect_snapshot({
-    old <- file_time_series_multi_reads() |> tecan_read_temperature()
-    new <- file_time_series_multi_reads() |>
+    old <- file_time_series_multiple_reads() |> tecan_read_temperature()
+    new <- file_time_series_multiple_reads() |>
       tecan_parse() |>
       dplyr::select(time_s, temp_c) |>
       dplyr::distinct() |>
@@ -27,7 +27,7 @@ test_that("tecan_read_temperature() runs successfully", {
     file_time_series_single_reads() |> tecan_read_temperature()
   )
   expect_no_error(
-    file_time_series_multi_reads() |> tecan_read_temperature()
+    file_time_series_multiple_reads() |> tecan_read_temperature()
   )
 })
 
@@ -47,6 +47,6 @@ test_that("parser expects valid file path", {
 test_that("parser expects sheet number as numeric", {
   withr::local_options(lifecycle_verbosity = "quiet")
   expect_error(
-    file_time_series_multi_reads() |> tecan_read_temperature("2")
+    file_time_series_multiple_reads() |> tecan_read_temperature("2")
   )
 })

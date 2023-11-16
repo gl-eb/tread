@@ -1,7 +1,7 @@
 # tecan_time_series_multiple_reads produces reproducible results
 
     Code
-      tecan_time_series_multiple_reads(tecan_raw$time_series_multi_reads)
+      tecan_time_series_multiple_reads(tecan_raw$time_series_multiple_reads)
     Output
       # A tibble: 120 x 10
          well  `Time [s]` `Temp. [°C]`   Mean  StDev  `1;2` `2;1`  `1;1`  `0;1`  `1;0`

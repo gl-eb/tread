@@ -31,7 +31,7 @@ test_that("tecan_single_time_single_reads expects data frame as input", {
 
 test_that("tecan_single_time_single_reads expects data in specific format", {
   expect_error(
-    tecan_raw$single_time_multi_reads |> tecan_single_time_single_reads(),
+    tecan_raw$single_time_multiple_reads |> tecan_single_time_single_reads(),
     "No data found in the expected format"
   )
   expect_error(
@@ -39,7 +39,7 @@ test_that("tecan_single_time_single_reads expects data in specific format", {
     "No data found in the expected format"
   )
   expect_error(
-    tecan_raw$time_series_multi_reads |> tecan_single_time_single_reads(),
+    tecan_raw$time_series_multiple_reads |> tecan_single_time_single_reads(),
     "No data found in the expected format"
   )
 })

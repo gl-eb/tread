@@ -67,7 +67,7 @@ dat <- tecan_unite("path/to/file.xlsx", segments = 2, start = 1)
 tecan_parse(
   system.file(
     "extdata",
-    "tecan_time_series_multi_reads.xlsx",
+    "tecan_time_series_multiple_reads.xlsx",
     package = "tecanr"
   )
 )

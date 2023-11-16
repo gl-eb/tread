@@ -16,7 +16,7 @@
 #' tecan_read_temperature(
 #'   system.file(
 #'     "extdata",
-#'     "tecan_time_series_multi_reads.xlsx",
+#'     "tecan_time_series_multiple_reads.xlsx",
 #'     package = "tecanr"
 #'   )
 #' )
@@ -24,7 +24,7 @@
 #' tecan_parse(
 #'   system.file(
 #'     "extdata",
-#'     "tecan_time_series_multi_reads.xlsx",
+#'     "tecan_time_series_multiple_reads.xlsx",
 #'     package = "tecanr"
 #'   )
 #' ) |>

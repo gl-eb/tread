@@ -1,7 +1,7 @@
 # tecan_single_time_multiple_reads produces reproducible results
 
     Code
-      tecan_single_time_multiple_reads(tecan_raw$single_time_multi_reads)
+      tecan_single_time_multiple_reads(tecan_raw$single_time_multiple_reads)
     Output
       # A tibble: 96 x 8
          Well   Mean  StDev `1;2` `2;1`  `1;1`  `0;1`  `1;0`

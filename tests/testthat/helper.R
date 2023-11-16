@@ -4,9 +4,9 @@ file_single_time_single_reads <- function() system.file(
   "tecan_single_time_single_reads.xlsx",
   package = "tecanr"
 )
-file_single_time_multi_reads <- function() system.file(
+file_single_time_multiple_reads <- function() system.file(
   "extdata",
-  "tecan_single_time_multi_reads.xlsx",
+  "tecan_single_time_multiple_reads.xlsx",
   package = "tecanr"
 )
 file_time_series_single_reads <- function() system.file(
@@ -14,9 +14,9 @@ file_time_series_single_reads <- function() system.file(
   "tecan_time_series_single_reads.xlsx",
   package = "tecanr"
 )
-file_time_series_multi_reads <- function() system.file(
+file_time_series_multiple_reads <- function() system.file(
   "extdata",
-  "tecan_time_series_multi_reads.xlsx",
+  "tecan_time_series_multiple_reads.xlsx",
   package = "tecanr"
 )
 

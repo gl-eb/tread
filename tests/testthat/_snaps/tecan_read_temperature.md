@@ -1,7 +1,7 @@
 # tecan_read_temperature() is deprecated
 
     Code
-      tecan_read_temperature(file_time_series_multi_reads())
+      tecan_read_temperature(file_time_series_multiple_reads())
     Condition
       Warning:
       `tecan_read_temperature()` was deprecated in tecanr 0.4.0.
@@ -22,26 +22,26 @@
       10  5400        30.6
       11  6000        30.8
       12  6600        30.8
-      13  7200        31  
+      13  7200        31
       14  7800        30.9
       15  8400        30.9
       16  9000        31.2
       17  9600        31.2
       18 10200        31.3
-      19 10800        31  
+      19 10800        31
       20 11400        31.2
 
 # tecan_read_temperature() still works
 
     Code
-      old <- tecan_read_temperature(file_time_series_multi_reads())
+      old <- tecan_read_temperature(file_time_series_multiple_reads())
     Condition
       Warning:
       `tecan_read_temperature()` was deprecated in tecanr 0.4.0.
       i This function is a special case of tecan_parse(); use it instead
     Code
       new <- dplyr::mutate(dplyr::rename(dplyr::distinct(dplyr::select(tecan_parse(
-        file_time_series_multi_reads()), time_s, temp_c)), time = time_s,
+        file_time_series_multiple_reads()), time_s, temp_c)), time = time_s,
       temperature = temp_c), time = as.integer(time))
     Message
       i Multiple reads per well detected
