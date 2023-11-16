@@ -19,6 +19,8 @@ reference:
     to convert the output of `readxl::read_xlsx()` into
     [tidy format](https://vita.had.co.nz/papers/tidy-data.html)
   contents:
+  - tecan_single_time_single_reads
   - tecan_single_time_multiple_reads
+  - tecan_time_series_single_reads
   - tecan_time_series_multiple_reads
   - tecan_raw
