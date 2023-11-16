@@ -36,41 +36,59 @@ You can install tecanr from [GitHub](https://github.com/gl-eb/tecanr) with:
 devtools::install_github("gl-eb/tecanr")
 ```
 
-## Example
+### Development Version
+
+You can also install the development version.
+While it may contain unreleased features, changes or bugfixes, it is also likely to rapidly evolve, potentially breaking your code.
+Do not use the development version if you are not willing to deal with this.
+
+``` r
+devtools::install_github("gl-eb/tecanr", ref = "develop")
+```
+
+## Hot To Use
 
 ```{r loading}
 library(tecanr)
 ```
 
-```{r example-data}
-# read supplied example file of single timepoint measurements
-dat <- tecan_parse(
-  system.file(
-    "extdata",
-    "tecan_single_time_multi_reads.xlsx",
-    package = "tecanr"
-  )
-)
-dat
-```
-
 ```{r example-custom, eval = FALSE}
-# read your own set measurements
-dat2 <- tecan_parse("path/to/file.xlsx")
+# parse your own set of measurements
+dat <- tecan_parse("path/to/file.xlsx")
 
 # specify sheet of the excel file (default: 1)
-dat3 <- tecan_parse("path/to/file.xlsx", sheet = 3)
+dat <- tecan_parse("path/to/file.xlsx", sheet = 3)
+
+# unite multiple segments of a time series of measurements
+dat <- tecan_unite("path/to/file.xlsx")
+
+# specify with which sheets to start and how many to include
+dat <- tecan_unite("path/to/file.xlsx", segments = 2, start = 1)
 ```
 
-```{r example-data-multi}
-# read supplied example file of multiple timepoint measurements
-# parameters work the same as for tecan_read_single()
-dat4 <- tecan_parse(
+### Examples
+
+```{r example-data}
+# parse supplied example file of time series with multiple measurements per well
+# at each timepoint
+tecan_parse(
   system.file(
     "extdata",
     "tecan_time_series_multi_reads.xlsx",
     package = "tecanr"
   )
 )
-dat4
+```
+
+```{r example-data-multi}
+# read supplied example file of a time series of measurements where the plate
+# reader program was stopped and restarted, resulting in the data being split
+# into multiple segments / sheets
+tecan_unite(
+  system.file(
+    "extdata",
+    "tecan_time_series_segments.xlsx",
+    package = "tecanr"
+  )
+)
 ```
