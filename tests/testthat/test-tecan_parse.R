@@ -15,20 +15,26 @@ test_that("tecan_parse() runs successfully for all data formats", {
   )
 }) |> suppressMessages()
 
-test_that("tacan_parse() messages correctly", {
+test_that("tecan_parse() messages correctly", {
   expect_no_message(
     file_single_time_single_reads() |> tecan_parse()
   )
   expect_message(
-    file_single_time_multi_reads() |> tecan_parse()
+    file_single_time_multi_reads() |> tecan_parse(),
+    "Multiple reads per well detected"
   )
   expect_message(
     file_time_series_single_reads() |> tecan_parse(),
     "Time series detected"
   )
   expect_message(
-    file_time_series_multi_reads() |> tecan_parse()
-  )
+    file_time_series_multi_reads() |> tecan_parse(),
+    "Time series detected"
+  ) |> suppressMessages()
+  expect_message(
+    file_time_series_multi_reads() |> tecan_parse(),
+    "Multiple reads per well detected"
+  ) |> suppressMessages()
 })
 
 # test detection of non-compliant arguments ------------------------------------
