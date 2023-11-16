@@ -30,6 +30,16 @@ tecan_time_series_single_reads <- function(dat_raw) {
     }
   }
 
+  # check if data was found
+  if (rlang::is_empty(data_start) | rlang::is_empty(data_end)) {
+    cli::cli_abort(c(
+      "x" = paste(
+        "No data found in the expected format.",
+        "Please inspect the Excel sheet carefully"
+      )
+    ))
+  }
+
   # compose data frame using information gathered on first traverse
   dat <- dat_raw[data_start:data_end, ] |>
     dplyr::select(!(tidyselect::where(~ all(is.na(.x))))) |>
