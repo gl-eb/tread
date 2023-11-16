@@ -1,7 +1,7 @@
 # test correct functioning of tecan_parse() ------------------------------------
 
 test_that("tecan_parse() runs successfully for all data formats", {
-  expect_error(
+  expect_no_error(
     file_single_time_single_reads() |> tecan_parse()
   )
   expect_no_error(
@@ -16,7 +16,7 @@ test_that("tecan_parse() runs successfully for all data formats", {
 }) |> suppressMessages()
 
 test_that("tacan_parse() messages correctly", {
-  expect_warning(
+  expect_no_message(
     file_single_time_single_reads() |> tecan_parse()
   )
   expect_message(
