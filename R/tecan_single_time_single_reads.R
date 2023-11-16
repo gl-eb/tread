@@ -33,10 +33,10 @@ tecan_single_time_single_reads <- function(dat_raw) {
   # compose data frame using information gathered on first traverse
   dat <- dat_raw[data_start:data_end, ] |>
     janitor::row_to_names(row_number = 1) |>
-    dplyr::rename(row = `<>`) |>
+    dplyr::rename(row = "<>") |>
     dplyr::mutate(dplyr::across(2:tidyselect::last_col(), as.numeric)) |>
     tidyr::pivot_longer(
-      cols = 2:last_col(),
+      cols = 2:tidyselect::last_col(),
       names_to = "col",
       values_to = "value"
     ) |>

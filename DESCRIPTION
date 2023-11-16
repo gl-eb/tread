@@ -31,6 +31,7 @@ Imports:
     readxl,
     stringr,
     tibble,
+    tidyr,
     tidyselect,
     withr
 Suggests:

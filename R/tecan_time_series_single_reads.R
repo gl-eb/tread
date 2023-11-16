@@ -38,11 +38,11 @@ tecan_time_series_single_reads <- function(dat_raw) {
     janitor::row_to_names(row_number = 1) |>
     dplyr::mutate(dplyr::across(tidyselect::everything(), as.numeric)) |>
     tidyr::pivot_longer(
-      cols = 4:last_col(),
+      cols = 4:tidyselect::last_col(),
       names_to = "well",
       values_to = "value"
     ) |>
-    dplyr::relocate(well)
+    dplyr::relocate("well")
 
   return(dat)
 }
