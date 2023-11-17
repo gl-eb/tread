@@ -9,3 +9,6 @@
 .Rdata
 .httr-oauth
 docs
+inst/doc
+/doc/
+/Meta/

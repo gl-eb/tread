@@ -48,6 +48,8 @@ devtools::install_github("gl-eb/tecanr", ref = "develop")
 
 ## Hot To Use
 
+Examples of analysis workflows are documented in `vignette("tecanr")`
+
 ```{r loading}
 library(tecanr)
 ```
@@ -64,31 +66,4 @@ dat <- tecan_unite("path/to/file.xlsx")
 
 # specify with which sheets to start and how many to include
 dat <- tecan_unite("path/to/file.xlsx", segments = 2, start = 1)
-```
-
-### Examples
-
-```{r example-data}
-# parse supplied example file of time series with multiple measurements per well
-# at each timepoint
-tecan_parse(
-  system.file(
-    "extdata",
-    "tecan_time_series_multiple_reads.xlsx",
-    package = "tecanr"
-  )
-)
-```
-
-```{r example-data-multi}
-# read supplied example file of a time series of measurements where the plate
-# reader program was stopped and restarted, resulting in the data being split
-# into multiple segments / sheets
-tecan_unite(
-  system.file(
-    "extdata",
-    "tecan_time_series_segments.xlsx",
-    package = "tecanr"
-  )
-)
 ```
