@@ -52,7 +52,8 @@ tecan_time_series_single_reads <- function(dat_raw) {
       names_to = "well",
       values_to = "value"
     ) |>
-    dplyr::relocate("well")
+    dplyr::relocate("well") |>
+    tidyr::drop_na()
 
   return(dat)
 }
