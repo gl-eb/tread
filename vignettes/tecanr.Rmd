@@ -119,39 +119,130 @@ Finally, we can filter out any wells that do not contain bacteria and plot their
 library(ggplot2)
 library(ggbeeswarm)
 
-# filter out well that do not contain bacteria and separate the population name
+# filter out wells that do not contain bacteria and separate the population name
 # into the strain name and the replicate number
 dat_OD <- dat_OD |>
-  dplyr::filter(content != "buffer" & content != "medium") |>
+  dplyr::filter(content != "buffer" & content != "blank") |>
   tidyr::separate("content", into = c("strain", "replicate"), sep = 1)
 
 dat_OD
 
-# we plot the blanked OD values grouped by the letter of the strain name
+# we plot the blanked OD values grouped by the strain name
 dat_OD |> ggplot(aes(x = strain, mean, fill = replicate)) +
-geom_hline(yintercept = 0, linetype = 2, alpha = 0.5) +
-geom_beeswarm(cex = 2.5, size = 3, color = "black", shape = 21) +
-scale_fill_viridis_d() +
-labs(
-  x = "Population",
-  y = bquote("Bacterial Density ("*OD[600]*")"),
-  colour = "Replicate"
-) +
-theme_light(15)
+  geom_hline(yintercept = 0, linetype = 2, alpha = 0.5) +
+  geom_beeswarm(cex = 2.5, size = 3, color = "black", shape = 21) +
+  scale_fill_viridis_d() +
+  labs(
+    x = "Strain",
+    y = bquote("Bacterial Density ("*OD[600]*")"),
+    fill = "Replicate"
+  ) +
+  theme_light(15)
 ```
 
 
 # Joining Multiple Pieces and Plotting of a Growth Curve
 
-```{r example-data-multi}
-# read supplied example file of a time series of measurements where the plate
-# reader program was stopped and restarted, resulting in the data being split
-# into multiple segments / sheets
-tecan_unite(
-  system.file(
-    "extdata",
-    "tecan_time_series_segments.xlsx",
-    package = "tecanr"
+When running longer kinetic measurements (e.g. growth curves), plate readers cannot be used by other members of the lab.
+While the kinetic measurement programs can be stopped and restarted, the plate reader software i-control™ will always place the data from these restarts in a separate Excel sheet.
+Merging these segments of a kinetic measurements is laborious when done manually.
+
+Using `tecan_unite()` saves a considerable amount of time.
+The function does this by:
+
+  1. Importing data from each single sheet inside of an Excel file
+  2. Getting the exact start time and duration of each segment
+  3. Calculating the time offsets necessary to merge the segments into a continuous time series
+
+Because `tecan_parse()` is used for step (1), `tecan_unite()` will print diagnostic messages for each of the sheets it imports.
+You can suppress these using `suppressMessages()`.
+```{r gc-data-import}
+# get path to Excel file
+file_gc <- system.file(
+  "extdata",
+  "tecan_time_series_segments.xlsx",
+  package = "tecanr"
+)
+
+# read data from file
+dat_gc <- file_gc |> tecan_unite()
+
+# repeat with message suppression
+dat_gc <- file_gc |> tecan_unite() |> suppressMessages()
+```
+
+The table that `tecan_unite()` returns contains a time series of OD measurements for a number of wells.
+
+```{r gc-results}
+dat_gc
+```
+
+Again we will add additional information to the table.
+In this case it is the name of the bacterial population as well as a number to signify the replicate growth curve.
+
+```{r gc-metadata}
+# we create a table that contains information which population is inside which
+# well and also gives the replicate wells a replicate number
+annotation_gc <- tibble::tibble(
+  well = c(
+    "B1", "B2", "B3", "B4", "C4", "C5", "C6", "C8", "D9", "D10", "D11", "D12",
+    "E12", "F1", "F2", "F4", "G5","G6", "G7", "G8", "H8", "H9", "H10", "H12"
+  ),
+  population = c(
+    "D1", "D2", "D3", "D4", "H1", "H2", "H3", "blank", "D1", "D2", "D3", "D4",
+    "H1", "H2", "H3", "blank", "D1", "D2", "D3", "D4", "H1", "H2", "H3", "blank"
+  ),
+  gc_rep = c(
+    1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3
   )
 )
+
+# we join the annotation table to the OD table
+dat_gc <- dat_gc |>
+  dplyr::left_join(annotation_gc, by = dplyr::join_by("well")) |>
+  dplyr::relocate(c("population", "gc_rep"), .after = "well")
+
+dat_gc
+```
+
+We will now use the medium-only wells to blank all OD measurements.
+
+```{r gc-blank}
+# first we calculate the blanking value from the average of medium-only wells
+blank <- dat_gc |>
+  dplyr::filter(population == "blank") |>
+  dplyr::pull(mean) |>
+  mean()
+
+# then we substract the blanking value from all OD values
+# (mean and all four reading from each well)
+dat_gc <- dat_gc |>
+  dplyr::mutate(
+    dplyr::across(
+      c("mean", tidyselect::starts_with("x")),
+      ~ .x - blank
+    )
+  )
+
+dat_gc
+```
+
+Now we are ready to plot the growth curves.
+
+```{r gc-plot}
+library(ggplot2)
+
+# filter out blank wells
+dat_gc <- dat_gc |> dplyr::filter(population != "blank")
+
+# plot OD values over time
+dat_gc |> ggplot(aes(time / 3600, mean, group = well)) +
+  facet_wrap(vars(population), nrow = 2, scales = "free_x") +
+  geom_line(linewidth = 0.5) +
+  scale_x_continuous(limits = c(0, 24), breaks = seq(0, 24, 4)) +
+  labs(
+    x = "Time [h]",
+    y = "OD600"
+  ) +
+  theme_light(15)
 ```
