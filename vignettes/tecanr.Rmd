@@ -24,8 +24,8 @@ library(tecanr)
 
 # Reading and Plotting of OD Values
 
-First we will import the optical density measurements from the xlsx file using `tecan_parse()`
-The file we are using contains OD measurements of a 96-well plate with a single timepoint but multiple measurements per well.
+First we will import the optical density measurements from the .xlsx file using `tecan_parse()`
+The file we are using contains OD measurements of a 96-well plate at a single timepoint and multiple measurements per well.
 
 ```{r OD-data-import}
 # get path to Excel file
@@ -59,24 +59,25 @@ dat_OD |> plate_plot(
 )
 ```
 
-We can also add additional information to the table, e.g. which wells contain particular becterial strains and which liquid medium only.
+We can also add additional information to the table, e.g. which wells contain particular becterial strains liquid medium only for blanking.
+We recommend to use spreadsheet software such as Excel to create a similar table for you own needs and then import it into R instead of typing our the columns as is shown here.
 
 ```{r OD-metadata}
 # we create a table that describes the content of each well
-well_annotation <- tibble::tibble(
+annotation_OD <- tibble::tibble(
   well = dat_OD$well,
   content = c(
     "buffer", "buffer", "buffer", "buffer", "buffer", "buffer", "buffer",
     "buffer", "buffer", "buffer", "buffer", "buffer", "A1", "buffer", "A3",
     "buffer", "D1", "buffer", "D3", "buffer", "G1", "buffer", "G3",
     "buffer", "buffer", "A2", "buffer", "A4", "buffer", "D2", "buffer",
-    "D4", "buffer", "G2", "buffer", "medium", "B1", "buffer", "B3",
+    "D4", "buffer", "G2", "buffer", "blank", "B1", "buffer", "B3",
     "buffer", "E1", "buffer", "E3", "buffer", "H1", "buffer", "H3",
     "buffer", "buffer", "B2", "buffer", "B4", "buffer", "E2", "buffer",
-    "E4", "buffer", "H2", "buffer", "medium", "C1", "buffer", "C3",
+    "E4", "buffer", "H2", "buffer", "blank", "C1", "buffer", "C3",
     "buffer", "F1", "buffer", "F3", "buffer", "J1", "buffer", "J3",
     "buffer", "buffer", "C2", "buffer", "C4", "buffer", "F2", "buffer",
-    "F4", "buffer", "J2", "buffer", "medium", "buffer", "buffer",
+    "F4", "buffer", "J2", "buffer", "blank", "buffer", "buffer",
     "buffer", "buffer", "buffer", "buffer", "buffer", "buffer", "buffer",
     "buffer", "buffer", "buffer"
   )
@@ -84,7 +85,7 @@ well_annotation <- tibble::tibble(
 
 # we join the annotation table to the OD table
 dat_OD <- dat_OD |>
-  dplyr::left_join(well_annotation, by = dplyr::join_by("well")) |>
+  dplyr::left_join(annotation_OD, by = dplyr::join_by("well")) |>
   dplyr::relocate("content", .after = "well")
 
 dat_OD
@@ -95,7 +96,7 @@ Having medium-only wells allows us to blank the measurements.
 ```{r OD-blank}
 # first we calculate the blanking value from the average of medium-only wells
 blank <- dat_OD |>
-  dplyr::filter(content == "medium") |>
+  dplyr::filter(content == "blank") |>
   dplyr::pull(mean) |>
   mean()
 
