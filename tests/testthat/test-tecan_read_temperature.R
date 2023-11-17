@@ -8,7 +8,9 @@ test_that("tecan_read_temperature() is deprecated", {
 
 test_that("tecan_read_temperature() still works", {
   expect_snapshot({
-    old <- file_time_series_multiple_reads() |> tecan_read_temperature()
+    old <- file_time_series_multiple_reads() |>
+      tecan_read_temperature() |>
+      tidyr::drop_na()
     new <- file_time_series_multiple_reads() |>
       tecan_parse() |>
       dplyr::select(time_s, temp_c) |>

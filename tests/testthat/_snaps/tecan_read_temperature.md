@@ -7,7 +7,7 @@
       `tecan_read_temperature()` was deprecated in tecanr 0.4.0.
       i This function is a special case of tecan_parse(); use it instead
     Output
-      # A tibble: 20 x 2
+      # A tibble: 25 x 2
           time temperature
          <int>       <dbl>
        1     0        30.6
@@ -20,21 +20,12 @@
        8  4200        30.4
        9  4800        30.5
       10  5400        30.6
-      11  6000        30.8
-      12  6600        30.8
-      13  7200        31  
-      14  7800        30.9
-      15  8400        30.9
-      16  9000        31.2
-      17  9600        31.2
-      18 10200        31.3
-      19 10800        31  
-      20 11400        31.2
+      # i 15 more rows
 
 # tecan_read_temperature() still works
 
     Code
-      old <- tecan_read_temperature(file_time_series_multiple_reads())
+      old <- tidyr::drop_na(tecan_read_temperature(file_time_series_multiple_reads()))
     Condition
       Warning:
       `tecan_read_temperature()` was deprecated in tecanr 0.4.0.
