@@ -13,10 +13,15 @@ Tecan Infinite 200 Pro plate readers. Currently, only measurements with
 multiple reads per well are supported due to differences in the layout
 of the data in the spreadsheets.
 
-tecanr is currently in an unfinished state, so use with caution.
+## Acknowledgements
 
-Tecan® is a trademark of Tecan Group Ltd., Männedorf, Switzerland. I
-have no affiliation with them other than being a user of their products.
+Tecan® is a trademark of Tecan Group Ltd., Männedorf, Switzerland. The
+authors have no affiliation with them other than being users of their
+products.
+
+The plate reader icon was designed by
+[kehan](https://github.com/kehantan) and is licensed under
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/)
 
 ## Installation
 
