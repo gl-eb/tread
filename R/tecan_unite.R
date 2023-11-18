@@ -51,7 +51,7 @@ tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
 
   # if user does not provide number of segments, use number of sheets
   if (is.null(segments)) {
-    segments <- sheets
+    segments <- sheets - skip
   }
 
   # check validity of segments argument
@@ -85,12 +85,19 @@ tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
     end = lubridate::ymd_hms()
   )
 
+  # set Excel sheet indices and in which order they are read
+  # Specifically, we start from the last sheet in the Excel file or from the nth
+  # to last one if skip = n. Then we work our way forward (to the left when
+  # looking at the file in Excel) until the number of segments has been
+  # processed
+  indices <- seq(from = sheets - skip, by = -1, length.out = segments)
+
   # loop through all data-containing sheets
-  for (s in seq(skip + 1, segments)) {
+  for (i in seq(segments)) {
     # import excel sheet as a whole to extract starting time and duration
     dat_raw <- readxl::read_xlsx(
           xlsx_file,
-          sheet = segments - s + 1,
+          sheet = indices[i],
           col_names = FALSE
       ) |>
       suppressMessages()
@@ -113,7 +120,7 @@ tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
     # stop if datetime detection returns anything other than two rows
     if (length(start_raw) != 2) {
       cli::cli_abort(c(
-        "x" = "No valid data found in segment {s}"
+        "x" = "No valid data found in segment {i}"
       ))
     }
 
@@ -126,7 +133,7 @@ tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
     # import data starting from the back (# data-segments - current_index + 1)
     dat_sheet <- tecanr::tecan_parse(
         xlsx_file,
-        xlsx_sheet = segments - s + 1
+        xlsx_sheet = indices[i]
       ) |>
       janitor::clean_names() |>
       dplyr::rename(time = "time_s", temperature = "temp_c")
@@ -141,7 +148,7 @@ tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
     # update offsets table
     time_offsets <- time_offsets |>
       tibble::add_row(
-        segment = s,
+        segment = i,
         start = start_datetime,
         duration = segment_duration,
         end = start_datetime + .data$duration
@@ -152,10 +159,10 @@ tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
     if (nrow(time_offsets) > 1) {
       # get end datetime of previous segment
       previous_end <- time_offsets |>
-        dplyr::filter(.data$segment == s - 1) |>
+        dplyr::filter(.data$segment == i - 1) |>
         dplyr::pull(.data$end)
       current_start <- time_offsets |>
-        dplyr::filter(.data$segment == s) |>
+        dplyr::filter(.data$segment == i) |>
         dplyr::pull(.data$start)
 
       # get the time offset for the current sheet
@@ -164,7 +171,7 @@ tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
       if (current_offset < 0) {
         cli::cli_abort(c(
                 "Time offsets between segments should be positive",
-          "x" = "Time offset between segments {s-1} and {s} is {current_offset}"
+          "x" = "Time offset between segments {i-1} and {i} is {current_offset}"
         ))
       }
 
