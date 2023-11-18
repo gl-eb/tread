@@ -52,6 +52,6 @@ Suggests:
 Config/testthat/edition: 3
 Depends:
     R (>= 4.1.0)
-URL: http://www.gl-eb.me/tecanr/, https://github.com/gl-eb/tecanr/
+URL: https://www.gl-eb.me/tecanr/, https://github.com/gl-eb/tecanr/
 BugReports: https://github.com/gl-eb/tecanr/issues/
 VignetteBuilder: knitr

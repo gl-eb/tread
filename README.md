@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tecanr <a href="http://www.gl-eb.me/tecanr/"><img src="man/figures/logo.svg" align="right" height="139" alt="tecanr website" /></a>
+# tecanr <a href="https://www.gl-eb.me/tecanr/"><img src="man/figures/logo.svg" align="right" height="139" alt="tecanr website" /></a>
 
 <!-- badges: start -->
 
