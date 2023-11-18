@@ -16,3 +16,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} containing tidy data
 \code{\link[=tecan_single_time_single_reads]{tecan_single_time_single_reads()}} gets a Tecan plate reader measurement
 from an Excel file when a single reading was taken of each well
 }
+\examples{
+tecan_raw$single_time_single_reads |> tecan_single_time_single_reads()
+
+}

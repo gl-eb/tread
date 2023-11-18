@@ -17,3 +17,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} containing tidy data
 measurements from an Excel file when each timepoint contains multiple
 readings of each well
 }
+\examples{
+tecan_raw$time_series_multiple_reads |> tecan_time_series_multiple_reads()
+
+}

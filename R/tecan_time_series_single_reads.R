@@ -6,6 +6,11 @@
 #' @param dat_raw (tibble) a excel sheet
 #'
 #' @return A [tibble::tibble()] containing tidy data
+#'
+#' @examples
+#' tecan_raw$time_series_single_reads |> tecan_time_series_single_reads()
+#'
+#' @export
 tecan_time_series_single_reads <- function(dat_raw) {
   # check input for validity
   if (!is.data.frame(dat_raw)) {

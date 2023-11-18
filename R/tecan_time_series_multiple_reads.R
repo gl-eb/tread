@@ -10,6 +10,11 @@
 #'
 #' @importFrom data.table :=
 #' @importFrom magrittr %>%
+#'
+#' @examples
+#' tecan_raw$time_series_multiple_reads |> tecan_time_series_multiple_reads()
+#'
+#' @export
 tecan_time_series_multiple_reads <- function(dat_raw) {
   # check input for validity
   if (!is.data.frame(dat_raw)) {

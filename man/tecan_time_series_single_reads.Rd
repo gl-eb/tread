@@ -16,3 +16,7 @@ A \code{\link[tibble:tibble]{tibble::tibble()}} containing tidy data
 \code{\link[=tecan_time_series_single_reads]{tecan_time_series_single_reads()}} gets a time series of Tecan plate reader
 measurements from an Excel file when a single reading was taken of each well
 }
+\examples{
+tecan_raw$time_series_single_reads |> tecan_time_series_single_reads()
+
+}

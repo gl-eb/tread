@@ -21,7 +21,7 @@ measurement (single time point or time series, single or multiple reads
 per well) and will handle the data appropriately.
 }
 \examples{
-dat <- tecan_parse(
+tecan_parse(
   system.file(
     "extdata",
     "tecan_time_series_multiple_reads.xlsx",

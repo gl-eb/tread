@@ -24,7 +24,7 @@ segments of a time series spread over multiple sheets and automatically
 stitches them together accounting for the time gap between them
 }
 \examples{
-dat <- tecan_unite(
+tecan_unite(
   system.file(
     "extdata",
     "tecan_time_series_segments.xlsx",

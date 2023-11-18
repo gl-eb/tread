@@ -11,7 +11,7 @@
 #' @return A [tibble::tibble()] containing tidy data
 #'
 #' @examples
-#' dat <- tecan_parse(
+#' tecan_parse(
 #'   system.file(
 #'     "extdata",
 #'     "tecan_time_series_multiple_reads.xlsx",

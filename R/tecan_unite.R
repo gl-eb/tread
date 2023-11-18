@@ -15,7 +15,7 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data"))
 #' @return A [tibble::tibble()] containing tidy data
 #'
 #' @examples
-#' dat <- tecan_unite(
+#' tecan_unite(
 #'   system.file(
 #'     "extdata",
 #'     "tecan_time_series_segments.xlsx",
