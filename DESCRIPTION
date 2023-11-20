@@ -1,7 +1,7 @@
 Package: tecanr
 Type: Package
 Title: Read Tecan Infinite 200 Pro Data
-Version: 0.4.0
+Version: 0.4.0.9000
 Authors@R: c(
     person(
         given = "Gleb",

@@ -1,3 +1,5 @@
+# tecanr (development version)
+
 # tecanr 0.4.0
 
 - Add `tecan_unite()` for stitching together time series measurements when the plate reader programme was stopped and restarted
