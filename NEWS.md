@@ -1,4 +1,4 @@
-# tecanr 0.3.2.9000
+# tecanr 0.4.0
 
 - Add `tecan_unite()` for stitching together time series measurements when the plate reader programme was stopped and restarted
 - Add `tecan_single_time_single_reads()` and `tecan_time_series_single_reads()`, which allow `tecan_parse()` to deal with all four data formats (all combinations of single or multiple reads per well as well as single timepoint or time series)
