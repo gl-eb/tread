@@ -37,7 +37,7 @@ tecan_parse(
     package = "tecanr"
   )
 ) |>
-dplyr::select(time_s, temp_c) |>
+dplyr::select(time, temp) |>
 dplyr::distinct()
 
 }

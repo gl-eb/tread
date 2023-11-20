@@ -130,13 +130,8 @@ tecan_unite <- function(xlsx_file, segments = NULL, skip = 0) {
       ) |>
       lubridate::ymd_hms()
 
-    # import data starting from the back (# data-segments - current_index + 1)
-    dat_sheet <- tecanr::tecan_parse(
-        xlsx_file,
-        xlsx_sheet = indices[i]
-      ) |>
-      janitor::clean_names() |>
-      dplyr::rename(time = "time_s", temperature = "temp_c")
+    # import data starting from the back
+    dat_sheet <- tecanr::tecan_parse(xlsx_file, xlsx_sheet = indices[i])
 
     # calculate the duration of the current segment
     segment_duration <- dat_sheet |>

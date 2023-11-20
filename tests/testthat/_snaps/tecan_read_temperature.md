@@ -32,8 +32,8 @@
       i This function is a special case of tecan_parse(); use it instead
     Code
       new <- dplyr::mutate(dplyr::rename(dplyr::distinct(dplyr::select(tecan_parse(
-        file_time_series_multiple_reads()), time_s, temp_c)), time = time_s,
-      temperature = temp_c), time = as.integer(time))
+        file_time_series_multiple_reads()), time, temp)), temperature = temp), time = as.integer(
+        time))
     Message
       i Multiple reads per well detected
       i Time series detected

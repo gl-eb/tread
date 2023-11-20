@@ -94,7 +94,12 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
     }
   }
 
-  dat <- dat |> janitor::clean_names()
+  dat <- dat |>
+    janitor::clean_names() |>
+    dplyr::rename_with(
+      ~ stringr::str_split_i(.x, "_", 1),
+      tidyselect::matches("(time)|(temp)")
+    )
 
   return(dat)
 }

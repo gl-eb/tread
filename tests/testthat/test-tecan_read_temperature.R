@@ -13,9 +13,9 @@ test_that("tecan_read_temperature() still works", {
       tidyr::drop_na()
     new <- file_time_series_multiple_reads() |>
       tecan_parse() |>
-      dplyr::select(time_s, temp_c) |>
+      dplyr::select(time, temp) |>
       dplyr::distinct() |>
-      dplyr::rename(time = time_s, temperature = temp_c) |>
+      dplyr::rename(temperature = temp) |>
       dplyr::mutate(time = as.integer(time))
     expect_equal(old, new)
   }) |> suppressWarnings()
