@@ -8,6 +8,7 @@
 .Ruserdata
 .Rdata
 .httr-oauth
-
-# project specific files
-~$*
+docs
+inst/doc
+/doc/
+/Meta/

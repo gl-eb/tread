@@ -3,14 +3,14 @@
 \docType{data}
 \name{tecan_raw}
 \alias{tecan_raw}
-\title{Raw Tecan Infinite 200 Pro data}
+\title{Raw data for conversion to long format}
 \format{
 A list of four tibbles
 \describe{
-  \item{dat_raw_1}{single timepoint and single read per well}
-  \item{dat_raw_2}{single timepoint and multiple reads per well}
-  \item{dat_raw_3}{timeseries and single read per well}
-  \item{dat_raw_4}{timeseries and multiple reads per well}
+\item{dat_raw_1}{single timepoint and single read per well}
+\item{dat_raw_2}{single timepoint and multiple reads per well}
+\item{dat_raw_3}{timeseries and single read per well}
+\item{dat_raw_4}{timeseries and multiple reads per well}
 }
 }
 \source{

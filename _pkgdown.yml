@@ -1,0 +1,30 @@
+url: https://www.gl-eb.me/tecanr/
+template:
+  bootstrap: 5
+
+reference:
+- title: Read and Wrangle Data
+  desc: >
+    These functions use `readxl::read_xlsx()` to import data from Excel files
+    and then wrangle it into
+    [tidy format](https://vita.had.co.nz/papers/tidy-data.html)
+    for downstream plotting and analysis. You will want to use one of these
+    functions in most cases.
+  contents:
+  - tecan_parse
+  - tecan_unite
+
+- title: Convert to Tidy Format
+  desc: >
+    These functions are what higher-level functions such as `tecan_parse()` use
+    to convert the output of `readxl::read_xlsx()` into
+    [tidy format](https://vita.had.co.nz/papers/tidy-data.html). These functions for more specific use cases where the data type is known and side
+    effects of the higher-level functions are unwanted. The example data set
+    is mostly useful for debugging and understanding the inner workings of these
+    functions.
+  contents:
+  - tecan_single_time_single_reads
+  - tecan_single_time_multiple_reads
+  - tecan_time_series_single_reads
+  - tecan_time_series_multiple_reads
+  - tecan_raw

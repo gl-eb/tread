@@ -1,32 +1,50 @@
-#' Parses a Tecan Infinite 200 Pro plate reader excel file, determines the type
-#' of measurement (single time point or time series, single or multiple reads
-#' per well), and reads the data
+#' Parse a Tecan Infinite 200 Pro plate reader file
+#'
+#' [tecan_parse()] reads data from a the Excel file produced by a Tecan
+#' Infinite 200 Pro plate reader. It automatically determines the type of
+#' measurement (single time point or time series, single or multiple reads
+#' per well) and will handle the data appropriately.
 #'
 #' @param xlsx_file (character) path to Excel file
-#' @param xlsx_sheet (numeric) number of Excel sheet to read (default: 1)
+#' @param xlsx_sheet (numeric) index of Excel sheet to read from (default: 1)
 #'
-#' @return (tibble) long format data
+#' @return A [tibble::tibble()] containing tidy data
 #'
 #' @examples
-#' dat <- tecan_parse(
+#' tecan_parse(
 #'   system.file(
 #'     "extdata",
-#'     "tecan_time_series_multi_reads.xlsx",
+#'     "tecan_time_series_multiple_reads.xlsx",
 #'     package = "tecanr"
 #'   )
 #' )
 #'
 #' @export
 tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
-  # check parameters for validity
+  # set options within the scope of this function
+  withr::local_options(list(rlib_name_repair_verbosity = "quiet"))
+
+  # check function arguments for validity
+
   if (!(is.character(xlsx_file))) {
-    stop("File path must be a non empty character")
+    cli::cli_abort(c(
+            "{.var xlsx_file} must be a character",
+      "x" = "You've supplied a {.cls {class(xlsx_file)}}."
+    ))
   }
-  if (!(file.exists(xlsx_file))) {
-    stop(paste("File does not exist:", xlsx_file))
+
+  xlsx_file <- xlsx_file |> fs::as_fs_path()
+
+  if (!(fs::file_exists(xlsx_file))) {
+    cli::cli_abort(c(
+      "x" = "File does not exist: {.file {xlsx_file}}"
+    ))
   }
   if (!(is.numeric(xlsx_sheet))) {
-    stop("Sheet number must be numeric")
+    cli::cli_abort(c(
+            "{.var xlsx_sheet} must be numeric",
+      "x" = "You've supplied a {.cls {class(xlsx_sheet)}}."
+    ))
   }
 
   # import data from excel spreadsheet
@@ -45,11 +63,11 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
                multiple_reads == FALSE) {
       # detect if multiple reads per well were taken
       multiple_reads <- TRUE
-      writeLines("Multiple reads per well detected")
-    } else if (stringr::str_detect(dat_raw[i, 1], "Cycle")) {
+      cli::cli_inform(c("i" = "Multiple reads per well detected"))
+    } else if (stringr::str_detect(dat_raw[i, 1], "Cycle") && !time_series) {
       # detect if measurements are time series
       time_series <- TRUE
-      writeLines("Time series detected")
+      cli::cli_inform(c("i" = "Time series detected"))
     } else if (multiple_reads && time_series) {
       break
     }
@@ -67,13 +85,21 @@ tecan_parse <- function(xlsx_file, xlsx_sheet = 1) {
     }
   } else {
     # if single read per well was taken
-    message("Single reads per well are not supported currently")
     if (time_series) {
       # if data is time series of single reads per well
+      dat <- tecan_time_series_single_reads(dat_raw)
     } else {
       # if data is from single time point and a single read per well
+      dat <- tecan_single_time_single_reads(dat_raw)
     }
   }
+
+  dat <- dat |>
+    janitor::clean_names() |>
+    dplyr::rename_with(
+      ~ stringr::str_split_i(.x, "_", 1),
+      tidyselect::matches("(time)|(temp)")
+    )
 
   return(dat)
 }

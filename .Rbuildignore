@@ -4,3 +4,11 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^data-raw$
+^README\.Rmd$
+^\.github$
+^.*\.code-workspace$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^doc$
+^Meta$

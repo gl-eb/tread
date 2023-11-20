@@ -2,18 +2,22 @@
 % Please edit documentation in R/tecan_time_series_multiple_reads.R
 \name{tecan_time_series_multiple_reads}
 \alias{tecan_time_series_multiple_reads}
-\title{Reads a time series of multiple OD measurements per well from a tecan plate
-reader excel file}
+\title{Read a time series of multiple measurements per well}
 \usage{
 tecan_time_series_multiple_reads(dat_raw)
 }
 \arguments{
-\item{dat_raw}{(tibble) a excel sheet}
+\item{dat_raw}{(tibble) an Excel sheet as returned by \code{\link[readxl:read_excel]{readxl::read_xlsx()}}}
 }
 \value{
-(tibble) long format data
+A \code{\link[tibble:tibble]{tibble::tibble()}} containing tidy data
 }
 \description{
-Reads a time series of multiple OD measurements per well from a tecan plate
-reader excel file
+\code{\link[=tecan_time_series_multiple_reads]{tecan_time_series_multiple_reads()}} gets a series of Tecan plate reader
+measurements from an Excel file when each timepoint contains multiple
+readings of each well
+}
+\examples{
+tecan_raw$time_series_multiple_reads |> tecan_time_series_multiple_reads()
+
 }

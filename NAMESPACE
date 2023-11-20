@@ -2,5 +2,11 @@
 
 export(tecan_parse)
 export(tecan_read_temperature)
+export(tecan_single_time_multiple_reads)
+export(tecan_single_time_single_reads)
+export(tecan_time_series_multiple_reads)
+export(tecan_time_series_single_reads)
+export(tecan_unite)
 importFrom(data.table,":=")
+importFrom(lifecycle,deprecated)
 importFrom(magrittr,"%>%")
