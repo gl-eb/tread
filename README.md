@@ -13,16 +13,6 @@ Tecan Infinite 200 Pro plate readers. Currently, only measurements with
 multiple reads per well are supported due to differences in the layout
 of the data in the spreadsheets.
 
-## Acknowledgements
-
-Tecan® is a trademark of Tecan Group Ltd., Männedorf, Switzerland. The
-authors have no affiliation with them other than being users of their
-products.
-
-The plate reader icon was designed by
-[kehan](https://github.com/kehantan) and is licensed under
-[CC0](https://creativecommons.org/publicdomain/zero/1.0/)
-
 ## Installation
 
 You can install tecanr from [GitHub](https://github.com/gl-eb/tecanr)
@@ -65,3 +55,13 @@ dat <- tecan_unite("path/to/file.xlsx")
 # specify with which sheets to start and how many to include
 dat <- tecan_unite("path/to/file.xlsx", segments = 2, start = 1)
 ```
+
+## Acknowledgements
+
+Tecan® is a trademark of Tecan Group Ltd., Männedorf, Switzerland. The
+authors have no affiliation with them other than being users of their
+products.
+
+The plate reader icon was designed by
+[kehan](https://github.com/kehantan) and is licensed under
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/)
