@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   tecanr: tecanr.html
-last_built: 2023-11-20T13:11Z
+last_built: 2023-11-20T13:20Z
 urls:
   reference: https://www.gl-eb.me/tecanr/reference
   article: https://www.gl-eb.me/tecanr/articles
