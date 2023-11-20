@@ -1,19 +1,11 @@
-# tecanr (development version)
+# tecanr 0.3.2.9000
 
 - Add `tecan_unite()` for stitching together time series measurements when the plate reader programme was stopped and restarted
 - Add `tecan_single_time_single_reads()` and `tecan_time_series_single_reads()`, which allow `tecan_parse()` to deal with all four data formats (all combinations of single or multiple reads per well as well as single timepoint or time series)
 - `tecan_parse()` now returns a `tibble::tibble()` with clean column names and correct column types
 - Deprecated `tecan_read_temperature()` since it is a special case of `tecan_parse()` and much less flexible in regards to the format of the input file
-- Create pkgdown website
-- Enable GitHub CI
-- Expand unit testing
-- Generate README from Rmarkdown document
-- Import tidyselect now that `where()` is exported
-- Use fs functions such as `fs::file_exists()` for argument validation
-- Use cli functions such as `cli::cli_abort()` for messaging
-- Improvements to documentation
-- Fix automated testing
-- Hide messages telling the user that column names were automatically repaired
+- Improve documentation and create pkgdown website
+- Expand unit testing and use GitHub CI
 
 # tecanr 0.3.2
 
