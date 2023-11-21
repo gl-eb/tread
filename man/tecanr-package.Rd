@@ -18,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Gleb Ebert \email{gleb.ebert@env.ethz.ch} (\href{https://orcid.org/0000-0002-7734-3824}{ORCID}) [copyright holder]
+\strong{Maintainer}: Gleb G. Ebert \email{gleb.ebert@env.ethz.ch} (\href{https://orcid.org/0000-0002-7734-3824}{ORCID}) [copyright holder]
 
 Other contributors:
 \itemize{

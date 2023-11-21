@@ -4,7 +4,7 @@ Title: Read Tecan Infinite 200 Pro Data
 Version: 0.4.0.9000
 Authors@R: c(
     person(
-        given = "Gleb",
+        given = "Gleb G.",
         family = "Ebert",
         role = c("aut", "cre", "cph"),
         email = "gleb.ebert@env.ethz.ch",
