@@ -1,9 +1,7 @@
-# tecanr (development version)
+# tecanr 0.4.1
 
-- Add custom citation and doi badge
-- Update authors and copyright holders
-- Remove outdated sentence from README
-- Reformat URLs in description
+- Add citation information and doi badge
+- Update author and copyright holder information
 
 # tecanr 0.4.0
 
