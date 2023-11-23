@@ -2,6 +2,7 @@
 
 - Update authors and copyright holders
 - Remove outdated sentence from README
+- Reformat URLs in description
 
 # tecanr 0.4.0
 
