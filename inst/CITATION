@@ -1,0 +1,10 @@
+bibentry(
+  "Manual",
+  title = "tecanr: Read Tecan Infinite 200 Pro Data",
+  author = "Gleb Ebert",
+  year = 2023,
+  publisher = "Zenodo",
+  note = "R package, https://github.com/gl-eb/tecanr/",
+  doi = "10.5281/zenodo.10200272",
+  url = "https://www.gl-eb.me/tecanr/"
+)

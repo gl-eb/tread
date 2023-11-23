@@ -1,3 +1,8 @@
+# tecanr 0.4.1
+
+- Add citation information and doi badge
+- Update author and copyright holder information
+
 # tecanr 0.4.0
 
 - Add `tecan_unite()` for stitching together time series measurements when the plate reader programme was stopped and restarted

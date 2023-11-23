@@ -1,10 +1,10 @@
 Package: tecanr
 Type: Package
 Title: Read Tecan Infinite 200 Pro Data
-Version: 0.4.0
+Version: 0.4.1
 Authors@R: c(
     person(
-        given = "Gleb",
+        given = "Gleb G.",
         family = "Ebert",
         role = c("aut", "cre", "cph"),
         email = "gleb.ebert@env.ethz.ch",
@@ -52,6 +52,6 @@ Suggests:
 Config/testthat/edition: 3
 Depends:
     R (>= 4.1.0)
-URL: https://www.gl-eb.me/tecanr/, https://github.com/gl-eb/tecanr/
-BugReports: https://github.com/gl-eb/tecanr/issues/
+URL: https://www.gl-eb.me/tecanr/, https://github.com/gl-eb/tecanr
+BugReports: https://github.com/gl-eb/tecanr/issues
 VignetteBuilder: knitr
