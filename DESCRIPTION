@@ -7,7 +7,7 @@ Authors@R: c(
         given = "Gleb G.",
         family = "Ebert",
         role = c("aut", "cre", "cph"),
-        email = "gleb.ebert@env.ethz.ch",
+        email = "dev@gl-eb.me",
         comment = c(ORCID = "0000-0002-7734-3824")
     ),
     person(
