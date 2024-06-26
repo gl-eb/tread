@@ -1,31 +1,31 @@
 # provide helper functions that return the path to the various example files
 file_single_time_single_reads <- function() system.file(
   "extdata",
-  "tecan_single_time_single_reads.xlsx",
-  package = "tecanr"
+  "single_time_single_reads.xlsx",
+  package = "tread"
 )
 file_single_time_multiple_reads <- function() system.file(
   "extdata",
-  "tecan_single_time_multiple_reads.xlsx",
-  package = "tecanr"
+  "single_time_multiple_reads.xlsx",
+  package = "tread"
 )
 file_time_series_single_reads <- function() system.file(
   "extdata",
-  "tecan_time_series_single_reads.xlsx",
-  package = "tecanr"
+  "time_series_single_reads.xlsx",
+  package = "tread"
 )
 file_time_series_multiple_reads <- function() system.file(
   "extdata",
-  "tecan_time_series_multiple_reads.xlsx",
-  package = "tecanr"
+  "time_series_multiple_reads.xlsx",
+  package = "tread"
 )
 
-# test tecan_unite() using the supplied example file
+# test tunite() using the supplied example file
 test_unite <- function(...) {
     system.file(
       "extdata",
-      "tecan_time_series_segments.xlsx",
-      package = "tecanr"
+      "time_series_segments.xlsx",
+      package = "tread"
     ) |>
-    tecan_unite(...)
+    tunite(...)
 }

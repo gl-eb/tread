@@ -1,4 +1,4 @@
-Package: tecanr
+Package: tread
 Type: Package
 Title: Read Tecan Infinite 200 Pro Data
 Version: 0.4.1.9000
@@ -52,6 +52,6 @@ Suggests:
 Config/testthat/edition: 3
 Depends:
     R (>= 4.1.0)
-URL: https://www.gl-eb.me/tecanr/, https://github.com/gl-eb/tecanr
-BugReports: https://github.com/gl-eb/tecanr/issues
+URL: https://www.gl-eb.me/tread/, https://github.com/gl-eb/tread
+BugReports: https://github.com/gl-eb/tread/issues
 VignetteBuilder: knitr

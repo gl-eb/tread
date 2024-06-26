@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(tecanr)
+library(tread)
 
-test_check("tecanr")
+test_check("tread")

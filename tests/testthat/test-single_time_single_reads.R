@@ -1,0 +1,45 @@
+# test correct functioning of single_time_single_reads -----------------
+
+test_that("single_time_single_reads runs without errors", {
+  expect_no_error(
+    traw$single_time_single_reads |> single_time_single_reads()
+  )
+})
+
+test_that("single_time_single_reads returns tibble", {
+  expect_s3_class(
+    traw$single_time_single_reads |> single_time_single_reads(),
+    "tbl_df"
+  )
+})
+
+test_that("single_time_single_reads produces reproducible results", {
+  expect_snapshot(
+    traw$single_time_single_reads |> single_time_single_reads()
+  )
+})
+
+
+# test detection of non-compliant arguments ------------------------------------
+
+test_that("single_time_single_reads expects data frame as input", {
+  expect_error(
+    single_time_single_reads("not a data frame"),
+    "must be a data frame"
+  )
+})
+
+test_that("single_time_single_reads expects data in specific format", {
+  expect_error(
+    traw$single_time_multiple_reads |> single_time_single_reads(),
+    "No data found in the expected format"
+  )
+  expect_error(
+    traw$time_series_single_reads |> single_time_single_reads(),
+    "No data found in the expected format"
+  )
+  expect_error(
+    traw$time_series_multiple_reads |> single_time_single_reads(),
+    "No data found in the expected format"
+  )
+})
