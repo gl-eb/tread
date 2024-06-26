@@ -1,4 +1,4 @@
-# tread (development version)
+# tread 0.5.0
 
 - Rename package to tread
 - Use citation file format (CFF) in addition to bibtex
