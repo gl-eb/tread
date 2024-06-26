@@ -1,5 +1,7 @@
 # tecanr (development version)
 
+- Use citation file format (CFF) in addition to bibtex
+
 # tecanr 0.4.1
 
 - Add citation information and doi badge
