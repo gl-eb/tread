@@ -40,8 +40,8 @@ Imports:
     tidyselect,
     withr
 Suggests:
+    cffr,
     covr,
-    DT,
     ggbeeswarm,
     ggplate,
     ggplot2,

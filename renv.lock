@@ -1177,7 +1177,7 @@
       "Package": "ragg",
       "Version": "1.3.2",
       "Source": "Repository",
-      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "Repository": "RSPM",
       "Requirements": [
         "systemfonts",
         "textshaping"
