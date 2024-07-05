@@ -1,5 +1,7 @@
 # tread (development version)
 
+- Standalone type checks using `rlang`
+
 # tread 0.5.0
 
 - Rename package to tread
