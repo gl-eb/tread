@@ -1,5 +1,7 @@
 # tread (development version)
 
+- Move commonly used checks to functions to avoid code repetition
+
 # tread 0.5.1
 
 - Standalone type checks using `rlang`

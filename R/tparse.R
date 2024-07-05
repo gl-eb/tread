@@ -30,11 +30,7 @@ tparse <- function(xlsx_file, xlsx_sheet = 1) {
 
   xlsx_file <- xlsx_file |> fs::as_fs_path()
 
-  if (!(fs::file_exists(xlsx_file))) {
-    cli::cli_abort(c(
-      "x" = "File does not exist: {.file {xlsx_file}}"
-    ))
-  }
+  check_file_exists(xlsx_file)
 
   # import data from excel spreadsheet
   dat_raw <- readxl::read_xlsx(xlsx_file, sheet = xlsx_sheet, col_names = FALSE)

@@ -37,14 +37,7 @@ time_series_multiple_reads <- function(dat_raw) {
   }
 
   # check if data was found
-  if (rlang::is_empty(well_names) | rlang::is_empty(well_locs)) {
-    cli::cli_abort(c(
-      "x" = paste(
-        "No data found in the expected format.",
-        "Please inspect the Excel sheet carefully"
-      )
-    ))
-  }
+  check_data_found(well_names, well_locs)
 
   # detect number of rows of data per well
   position_relative <- 0
