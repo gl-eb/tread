@@ -8,8 +8,6 @@
 #'
 #' @return A [tibble::tibble()] containing tidy data
 #'
-#' @importFrom magrittr %>%
-#'
 #' @examples
 #' traw$time_series_multiple_reads |> time_series_multiple_reads()
 #'
@@ -56,9 +54,8 @@ time_series_multiple_reads <- function(dat_raw) {
     # vector of rows to include in data
     rows <- (well_locs[well] + 1):(well_locs[well] + position_relative)
     # vector of columns to include in data (columns of NA are filtered out)
-    # magrittr pipe %>% necessary due to complex select condition
-    cols <- dat_raw[well_locs[well], ] %>%
-      dplyr::select(!(tidyselect::where(~ all(is.na(.x))))) |>
+    cols <- dat_raw[well_locs[well], ] |>
+      {\(c) dplyr::select(c, !(tidyselect::where(~ all(is.na(c)))))}() |>
       seq_along()
     # compose tibble for current well
     dat_well <- dat_raw[rows, cols] |>

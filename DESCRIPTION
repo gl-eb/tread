@@ -31,7 +31,6 @@ Imports:
     janitor,
     lifecycle,
     lubridate,
-    magrittr,
     purrr,
     readxl,
     rlang (>= 1.1.0),
