@@ -45,25 +45,14 @@ tread_temperature <- function(xlsx_file, xlsx_sheet = 1) {
   withr::local_options(list(rlib_name_repair_verbosity = "quiet"))
 
   # check function arguments for validity
-
-  if (!(is.character(xlsx_file))) {
-    cli::cli_abort(c(
-            "{.var xlsx_file} must be a character",
-      "x" = "You've supplied a {.cls {class(xlsx_file)}}."
-    ))
-  }
+  check_character(xlsx_file)
+  check_number_whole(xlsx_sheet)
 
   xlsx_file <- xlsx_file |> fs::as_fs_path()
 
   if (!(fs::file_exists(xlsx_file))) {
     cli::cli_abort(c(
       "x" = "File does not exist: {.file {xlsx_file}}"
-    ))
-  }
-  if (!(is.numeric(xlsx_sheet))) {
-    cli::cli_abort(c(
-            "{.var xlsx_sheet} must be numeric",
-      "x" = "You've supplied a {.cls {class(xlsx_sheet)}}."
     ))
   }
 

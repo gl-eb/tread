@@ -8,7 +8,6 @@
 #'
 #' @return A [tibble::tibble()] containing tidy data
 #'
-#' @importFrom data.table :=
 #' @importFrom magrittr %>%
 #'
 #' @examples
@@ -17,12 +16,7 @@
 #' @export
 time_series_multiple_reads <- function(dat_raw) {
   # check input for validity
-  if (!is.data.frame(dat_raw)) {
-    cli::cli_abort(c(
-            "{.var dat_raw} must be a data frame",
-      "x" = "You've supplied a {.cls {class(dat_raw)}}."
-    ))
-  }
+  check_data_frame(dat_raw)
 
   # initialize variables and vectors for data search
   well_found <- FALSE

@@ -30,8 +30,8 @@ test_that("file path is valid in tunite()", {
 })
 
 test_that("numeric tunite() arguments are numeric", {
-  expect_error(test_unite(segments = "2"), "must be a number")
-  expect_error(test_unite(skip = "0"), "must be a number")
+  expect_error(test_unite(segments = "2"), "must be a whole number")
+  expect_error(test_unite(skip = "0"), "must be a whole number")
 })
 
 test_that("(segments + skip <= sheets) in tunite()", {

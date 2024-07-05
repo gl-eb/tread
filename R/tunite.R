@@ -26,18 +26,8 @@ if(getRversion() >= "2.15.1")  utils::globalVariables(c(".data"))
 #' @export
 tunite <- function(xlsx_file, segments = NULL, skip = 0) {
   # check argument type and validity
-  if (!(is.character(xlsx_file))) {
-    cli::cli_abort(c(
-            "{.var xlsx_file} must be a character",
-      "x" = "You've supplied a {.cls {class(xlsx_file)}}."
-    ))
-  }
-  if (!is.numeric(skip)) {
-    cli::cli_abort(c(
-            "{.var skip} must be a number",
-      "x" = "You've supplied a {.cls {class(skip)}}."
-    ))
-  }
+  check_character(xlsx_file)
+  check_number_whole(skip)
   if (skip < 0) {
     cli::cli_abort(c(
             "{.var skip} must be >= 0",
@@ -55,12 +45,7 @@ tunite <- function(xlsx_file, segments = NULL, skip = 0) {
   }
 
   # check validity of segments argument
-  if (!is.numeric(segments)) {
-    cli::cli_abort(c(
-            "{.var segments} must be a number",
-      "x" = "You've supplied a {.cls {class(segments)}}."
-    ))
-  }
+  check_number_whole(segments)
   if ((segments + skip) > sheets) {
     cli::cli_abort(c(
       paste(
