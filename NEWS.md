@@ -1,4 +1,4 @@
-# tread (development version)
+# tread 0.5.2
 
 - Move commonly used checks to functions to avoid code repetition
 - Drop `magrittr` pipe dependency
