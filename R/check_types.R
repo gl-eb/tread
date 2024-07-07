@@ -27,7 +27,7 @@ check_data_found <- function(x, y = "") {
 check_file_exists <- function(file) {
   if (!(fs::file_exists(file))) {
     cli::cli_abort(c(
-      "x" = "File does not exist: {.file {xlsx_file}}"
+      "x" = "File does not exist: {.file {file}}"
     ))
   } else {
     return(invisible(NULL))
