@@ -1,6 +1,8 @@
 url: https://www.gl-eb.me/tread/
 template:
   bootstrap: 5
+  light-switch: true
+  theme-dark: github-dark
 
 reference:
 - title: Read and Wrangle Data

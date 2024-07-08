@@ -182,19 +182,14 @@
     },
     "cli": {
       "Package": "cli",
-      "Version": "3.6.3.9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "r-lib",
-      "RemoteRepo": "cli",
-      "RemoteRef": "main",
-      "RemoteSha": "d9febb5860083e6d028da42d5f6a3888754c798d",
+      "Version": "3.6.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "615afe1aecae35bc15d6d284fb240da7"
+      "Hash": "b21916dd77a27642b447374a5d30ecf3"
     },
     "clipr": {
       "Package": "clipr",
@@ -703,21 +698,6 @@
       ],
       "Hash": "d55aa087c47a63ead0f6fc10f8fa1ee0"
     },
-    "httr": {
-      "Package": "httr",
-      "Version": "1.4.7",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "R6",
-        "curl",
-        "jsonlite",
-        "mime",
-        "openssl"
-      ],
-      "Hash": "ac107251d9d9fd72f0ca8049988f1d7f"
-    },
     "httr2": {
       "Package": "httr2",
       "Version": "1.0.1",
@@ -801,7 +781,7 @@
     },
     "knitr": {
       "Package": "knitr",
-      "Version": "1.47",
+      "Version": "1.48",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -813,7 +793,7 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "7c99b2d55584b982717fcc0950378612"
+      "Hash": "acf380f300c721da9fde7df115a5f86f"
     },
     "labeling": {
       "Package": "labeling",
@@ -1017,7 +997,7 @@
     },
     "pkgdown": {
       "Package": "pkgdown",
-      "Version": "2.0.9",
+      "Version": "2.1.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -1028,11 +1008,11 @@
         "desc",
         "digest",
         "downlit",
+        "fontawesome",
         "fs",
-        "httr",
+        "httr2",
         "jsonlite",
-        "magrittr",
-        "memoise",
+        "openssl",
         "purrr",
         "ragg",
         "rlang",
@@ -1043,7 +1023,7 @@
         "xml2",
         "yaml"
       ],
-      "Hash": "8bf1151ed1a48328d71b937e651117a6"
+      "Hash": "0d3d789055c873f48521ce7e23c23f48"
     },
     "pkgload": {
       "Package": "pkgload",
@@ -1274,19 +1254,14 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "1.1.4.9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "r-lib",
-      "RemoteRepo": "rlang",
-      "RemoteRef": "main",
-      "RemoteSha": "6f102ce3a79720fefff7f044ac14d3f688429f75",
+      "Version": "1.1.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "utils"
       ],
-      "Hash": "4533be15b9ff29f234301eb052e0964f"
+      "Hash": "3eec01f8b1dee337674b2e34ab1f9bc1"
     },
     "rmarkdown": {
       "Package": "rmarkdown",
@@ -1662,11 +1637,11 @@
       "Version": "2.2.3.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "r-lib",
       "RemoteRepo": "usethis",
       "RemoteRef": "main",
-      "RemoteSha": "73b4e97b4f76d8c9b4b11761eb8e32a86bb2ceca",
+      "RemoteSha": "83283d7cf108d4e1e1077cc16189ef091f299f8c",
+      "RemoteHost": "api.github.com",
       "Requirements": [
         "R",
         "cli",
@@ -1691,7 +1666,7 @@
         "withr",
         "yaml"
       ],
-      "Hash": "1d76926b7e79b08ced877cf15598683c"
+      "Hash": "1030092341bb3373ed3a1cd4efb5027c"
     },
     "utf8": {
       "Package": "utf8",
@@ -1826,10 +1801,10 @@
     },
     "yaml": {
       "Package": "yaml",
-      "Version": "2.3.8",
+      "Version": "2.3.9",
       "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "29240487a071f535f5e5d5a323b7afbd"
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "Hash": "9cb28d11799d93c953f852083d55ee9e"
     },
     "zip": {
       "Package": "zip",
