@@ -1,4 +1,8 @@
-# tread (development version)
+# tread 0.5.3
+
+- Improve documentation
+- Update dev environment
+- Fix error message
 
 # tread 0.5.2
 
