@@ -1,63 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://www.gl-eb.me/tread/404.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/articles/tread.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/check_data_found.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/check_file_exists.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/single_time_multiple_reads.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/single_time_single_reads.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/time_series_multiple_reads.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/time_series_single_reads.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/tparse.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/traw.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/tread-package.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/tread_temperature.html</loc>
-  </url>
-  <url>
-    <loc>https://www.gl-eb.me/tread/reference/tunite.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://www.gl-eb.me/tread/404.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/LICENSE-text.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/LICENSE.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/articles/index.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/articles/tread.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/authors.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/index.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/news/index.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/check_data_found.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/check_file_exists.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/index.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/single_time_multiple_reads.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/single_time_single_reads.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/time_series_multiple_reads.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/time_series_single_reads.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/tparse.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/traw.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/tread-package.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/tread_temperature.html</loc></url>
+<url><loc>https://www.gl-eb.me/tread/reference/tunite.html</loc></url>
 </urlset>
+

@@ -1,10 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   tread: tread.html
-last_built: 2024-07-06T15:31Z
+last_built: 2025-02-26T12:05Z
 urls:
   reference: https://www.gl-eb.me/tread/reference
   article: https://www.gl-eb.me/tread/articles
-
