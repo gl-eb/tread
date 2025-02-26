@@ -31,6 +31,12 @@ You can install tread from [GitHub](https://github.com/gl-eb/tread) with:
 devtools::install_github("gl-eb/tread")
 ```
 
+To install the package including the vignette:
+
+```r
+devtools::install_github("gl-eb/tread", dependencies = TRUE, build_vignettes = TRUE)
+```
+
 ### Development Version
 
 You can also install the development version.

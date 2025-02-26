@@ -22,6 +22,12 @@ with:
 devtools::install_github("gl-eb/tread")
 ```
 
+To install the package including the vignette:
+
+``` r
+devtools::install_github("gl-eb/tread", dependencies = TRUE, build_vignettes = TRUE)
+```
+
 ### Development Version
 
 You can also install the development version. While it may contain
